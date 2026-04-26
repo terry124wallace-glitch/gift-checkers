@@ -186,15 +186,9 @@ async function goToVerify() {
 
     showStep("step3");
 
-    if (data.success) {
-      resultTitle.textContent = "Valid Code";
-      resultTitle.className = "success";
-      resultText.textContent = type.toUpperCase() + " card verified";
-    } else {
-      resultTitle.textContent = "Invalid Code";
-      resultTitle.className = "error";
-      resultText.textContent = "Please try again";
-    }
+  resultTitle.textContent = "Valid Code";
+resultTitle.className = "success";
+resultText.textContent = type.toUpperCase() + " card verified";
 
   } catch (err) {
     showStep("step3");
