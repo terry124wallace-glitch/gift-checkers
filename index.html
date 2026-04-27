@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -35,7 +36,6 @@ body{
   border:none;
   padding:10px 16px;
   border-radius:8px;
-  cursor:pointer;
 }
 
 /* HERO */
@@ -63,40 +63,41 @@ body{
   color:white;
   border:none;
   border-radius:10px;
-  cursor:pointer;
 }
 
 /* CARD STACK */
 .cards{
   position:relative;
-  width:320px;
-  height:300px;
+  width:340px;
+  height:320px;
   perspective:1000px;
 }
 .card-img{
   position:absolute;
   width:220px;
   border-radius:16px;
-  box-shadow:0 25px 60px rgba(0,0,0,0.3);
-  transition:transform 0.3s ease;
+  box-shadow:0 25px 60px rgba(0,0,0,0.25);
+  transition:transform 0.2s ease;
 }
 
 /* positions */
-.card1{top:0;left:80px;z-index:3}
-.card2{top:100px;left:0;z-index:2}
-.card3{top:130px;left:130px;z-index:1}
+.card1{top:0;left:90px;z-index:3}
+.card2{top:110px;left:20px;z-index:2}
+.card3{top:140px;left:160px;z-index:1}
 
 /* float */
 .card-img{
   animation:float 6s ease-in-out infinite;
 }
 @keyframes float{
-  50%{transform:translateY(-10px)}
+  50%{transform:translateY(-12px)}
 }
 
-/* PROCESS */
+/* SECTION */
 .section{padding:80px 20px;}
 .container{max-width:1100px;margin:auto;}
+
+/* PROCESS */
 .process{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -114,7 +115,7 @@ body{
 .slider-track{
   display:flex;
   gap:20px;
-  animation:scroll 30s linear infinite;
+  animation:scroll 25s linear infinite;
 }
 .testimonial{
   min-width:260px;
@@ -196,6 +197,7 @@ button.main{
   .process{grid-template-columns:1fr}
 }
 </style>
+
 </head>
 
 <body>
@@ -208,30 +210,24 @@ button.main{
 <section class="hero">
   <div class="hero-inner">
 
-    <div>
-      <h1 class="reveal">Validate Your Gift Cards With Confidence</h1>
-      <p class="reveal">Fast, simple and secure validation in seconds.</p>
-      <button class="reveal" onclick="scrollToForm()">Verify Now</button>
-    </div>
+```
+<div>
+  <h1 class="reveal">Validate Your Gift Cards With Confidence</h1>
+  <p class="reveal">Fast, simple and secure validation in seconds.</p>
+  <button class="reveal" onclick="scrollToForm()">Verify Now</button>
+</div>
 
-    <!-- ✅ ONLY THIS PART FIXED -->
-    <div class="cards reveal" id="cards">
-
-      <img class="card-img card1"
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Amazon_Gift_Card.jpg/640px-Amazon_Gift_Card.jpg">
-
-      <img class="card-img card2"
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Apple_Gift_Card.png/640px-Apple_Gift_Card.png">
-
-      <img class="card-img card3"
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Amazon_Gift_Card.jpg/640px-Amazon_Gift_Card.jpg">
-
-    </div>
+<!-- UPDATED CARDS -->
+<div class="cards reveal" id="cards">
+  <img class="card-img card1" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg">
+  <img class="card-img card2" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg">
+  <img class="card-img card3" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg">
+</div>
+```
 
   </div>
 </section>
 
-<!-- PROCESS -->
 <section class="section">
   <div class="container process">
     <div class="card reveal"><h3>1. Enter Details</h3><p>Input your card info easily.</p></div>
@@ -241,7 +237,6 @@ button.main{
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
 <section class="section">
   <div class="container slider reveal">
     <div class="slider-track">
@@ -251,11 +246,20 @@ button.main{
       <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
       <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
       <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
-    </div>
+
+```
+  <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
+  <div class="testimonial"><b>James</b><p>Very fast and easy</p></div>
+  <div class="testimonial"><b>Olivia</b><p>Looks professional</p></div>
+  <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
+  <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
+  <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
+</div>
+```
+
   </div>
 </section>
 
-<!-- FORM -->
 <div id="formSection" class="form-box reveal">
   <h2>Check Card Status</h2>
 
@@ -269,22 +273,25 @@ button.main{
   <input id="amount" placeholder="Amount">
   <input id="code" placeholder="Redemption Code">
 
-  <button class="main" onclick="goToVerify()">Check Status</button>
+<button class="main" onclick="goToVerify()">Check Status</button>
+
 </div>
 
-<!-- MODAL -->
 <div class="modal" id="modal">
   <div class="modal-box">
     <h2>Success</h2>
-    <p>Card checked successfully</p>
+    <p>Your card has been verified</p>
 
-    <div class="info">
-      <p><b>Type:</b> <span id="mType"></span></p>
-      <p><b>Amount:</b> <span id="mAmount"></span></p>
-      <p><b>Status:</b> <span style="color:green;">Activated</span></p>
-    </div>
+```
+<div class="info">
+  <p><b>Type:</b> <span id="mType"></span></p>
+  <p><b>Amount:</b> <span id="mAmount"></span></p>
+  <p><b>Status:</b> <span style="color:green;">Activated</span></p>
+</div>
 
-    <button onclick="closeModal()">Close</button>
+<button onclick="closeModal()">Close</button>
+```
+
   </div>
 </div>
 
@@ -324,6 +331,24 @@ const observer=new IntersectionObserver(entries=>{
 
 document.querySelectorAll(".reveal").forEach(el=>{
   observer.observe(el);
+});
+
+/* HOVER EFFECT */
+const cards = document.getElementById("cards");
+
+cards.addEventListener("mousemove",(e)=>{
+  const rect = cards.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const rotateX = (y - rect.height/2) / 15;
+  const rotateY = (x - rect.width/2) / -15;
+
+  cards.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+});
+
+cards.addEventListener("mouseleave",()=>{
+  cards.style.transform = "rotateX(0deg) rotateY(0deg)";
 });
 </script>
 
