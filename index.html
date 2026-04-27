@@ -9,71 +9,108 @@
 <style>
 body {
   margin:0;
-  font-family: Arial;
+  font-family:Arial;
   background:#f1f5f9;
 }
 
-/* HEADER */
-.header {
-  background: linear-gradient(90deg,#6d28d9,#4f46e5);
-  padding:18px;
-  color:white;
-  font-weight:bold;
+/* NAVBAR */
+.nav {
   display:flex;
   justify-content:space-between;
+  align-items:center;
+  padding:20px;
+  background:white;
+}
+.nav .logo {
+  font-weight:bold;
+  color:#4f46e5;
+}
+.nav .links {
+  display:flex;
+  gap:20px;
+}
+.nav button {
+  background:#4f46e5;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
 }
 
 /* HERO */
 .hero {
-  padding:60px 20px;
-  text-align:center;
+  padding:80px 20px;
 }
-.hero h1 {
-  font-size:28px;
+.hero-content {
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
 }
-.hero p {
+.hero-text h1 {
+  font-size:42px;
+}
+.hero-text p {
   color:#555;
 }
-.hero button {
+.hero-text button {
   margin-top:20px;
   padding:14px 20px;
-  border:none;
-  border-radius:10px;
   background:#4f46e5;
   color:white;
+  border:none;
+  border-radius:10px;
+}
+.hero img {
+  width:300px;
 }
 
-/* SECTIONS */
-.section {
-  padding:40px 20px;
+/* BADGE */
+.badge {
+  background:#e0e7ff;
+  color:#4f46e5;
+  padding:5px 10px;
+  border-radius:6px;
+  font-size:13px;
 }
 
-/* STEPS */
-.steps {
+/* PROCESS */
+.process {
+  max-width:1100px;
+  margin:60px auto;
+  display:flex;
+  gap:50px;
+  padding:20px;
+}
+.process-right {
   display:flex;
   flex-direction:column;
-  gap:25px;
+  gap:30px;
 }
-.step-item {
+.process-item {
   display:flex;
   gap:15px;
 }
 .circle {
   width:40px;
   height:40px;
-  border-radius:50%;
   border:2px solid #4f46e5;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
 /* TESTIMONIAL */
-.card {
+.testimonial {
+  max-width:600px;
+  margin:50px auto;
   background:white;
   padding:20px;
-  border-radius:12px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  border-radius:10px;
+  text-align:center;
 }
 
 /* CTA */
@@ -81,7 +118,7 @@ body {
   background:linear-gradient(90deg,#6d28d9,#4f46e5);
   color:white;
   text-align:center;
-  padding:50px 20px;
+  padding:60px 20px;
 }
 .cta button {
   margin-top:15px;
@@ -93,14 +130,12 @@ body {
 /* FORM */
 .container {
   background:white;
-  margin:20px auto;
+  margin:40px auto;
   padding:25px;
   border-radius:15px;
   width:90%;
   max-width:400px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
-
 input, select {
   width:100%;
   padding:12px;
@@ -108,7 +143,6 @@ input, select {
   border-radius:8px;
   border:1px solid #cbd5e1;
 }
-
 button.main {
   margin-top:20px;
   width:100%;
@@ -129,12 +163,7 @@ button.main {
   margin:40px auto;
   animation:spin 1s linear infinite;
 }
-@keyframes spin {
-  100% { transform:rotate(360deg); }
-}
-
-.step { display:none; text-align:center; }
-.step.active { display:block; }
+@keyframes spin {100%{transform:rotate(360deg);}}
 
 /* MODAL */
 .modal {
@@ -149,20 +178,7 @@ button.main {
 .modal-box {
   background:white;
   padding:25px;
-  border-radius:15px;
-  width:90%;
-  max-width:350px;
-}
-.success-icon {
-  width:60px;
-  height:60px;
-  background:#6d28d9;
-  border-radius:50%;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
+  border-radius:10px;
 }
 .close-btn {
   margin-top:20px;
@@ -171,7 +187,29 @@ button.main {
   background:#ef4444;
   color:white;
   border:none;
-  border-radius:10px;
+}
+
+/* SCROLL ANIMATION */
+.reveal {
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.6s;
+}
+.reveal.active {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero-content,
+  .process {
+    flex-direction:column;
+    text-align:center;
+  }
+  .hero img {
+    width:200px;
+  }
 }
 </style>
 
@@ -179,67 +217,107 @@ button.main {
 
 <body>
 
-<div class="header">
-  <div>✔ Gift Verify</div>
-  <div>☰</div>
+<!-- NAV -->
+
+<div class="nav">
+  <div class="logo">✔ Gift Verify</div>
+  <div class="links">
+    <span>Home</span>
+    <span>About</span>
+    <span>Process</span>
+    <span>Verify</span>
+  </div>
+  <button onclick="scrollToForm()">Try For Free</button>
 </div>
 
 <!-- HERO -->
 
-<section class="hero">
+<section class="hero reveal">
+  <div class="hero-content">
+
+```
+<div class="hero-text">
+  <span class="badge">Welcome Gift Verify</span>
   <h1>Validate Your Gift Cards With Confidence</h1>
   <p>No more guesswork. Check your card instantly.</p>
   <button onclick="scrollToForm()">Verify Now</button>
+</div>
+
+<img src="https://i.imgur.com/6X4YQ9T.png">
+```
+
+  </div>
 </section>
 
-<!-- STEPS -->
+<!-- PROCESS -->
 
-<section class="section">
-  <h2>How It Works</h2>
-  <div class="steps">
-    <div class="step-item">
-      <div class="circle">1</div>
-      <div>Enter your card details</div>
-    </div>
-    <div class="step-item">
-      <div class="circle">2</div>
-      <div>System validation check</div>
-    </div>
-    <div class="step-item">
-      <div class="circle">3</div>
-      <div>Get instant result</div>
-    </div>
+<section class="process reveal">
+
+  <div>
+    <span class="badge">Step-By-Step</span>
+    <h2>How Our Validation Works</h2>
+    <p>We’ve made validation simple and fast.</p>
+    <button onclick="scrollToForm()">Verify Now</button>
   </div>
+
+  <div class="process-right">
+
+```
+<div class="process-item">
+  <div class="circle">1</div>
+  <div>
+    <h3>Enter Details</h3>
+    <p>Input your card info.</p>
+  </div>
+</div>
+
+<div class="process-item">
+  <div class="circle">2</div>
+  <div>
+    <h3>Validation Check</h3>
+    <p>System checks your data.</p>
+  </div>
+</div>
+
+<div class="process-item">
+  <div class="circle">3</div>
+  <div>
+    <h3>Instant Result</h3>
+    <p>Get confirmation instantly.</p>
+  </div>
+</div>
+```
+
+  </div>
+
 </section>
 
 <!-- TESTIMONIAL -->
 
-<section class="section">
-  <div class="card">
-    <b>Emily White</b>
-    <p>Helped me avoid a fake card, thank you</p>
-  </div>
-</section>
+<div class="testimonial reveal">
+  <b>Emily White</b>
+  <p>Helped me avoid a fake card</p>
+</div>
 
 <!-- CTA -->
 
-<section class="cta">
+<section class="cta reveal">
   <h2>Verify Your Gift Card Today</h2>
-  <button onclick="scrollToForm()">Get Started Now</button>
+  <button onclick="scrollToForm()">Get Started</button>
 </section>
 
 <!-- FORM -->
 
-<div id="formSection" class="container step active">
+<div id="formSection" class="container reveal">
   <h2>Check Card Status</h2>
 
 <label>Card Type</label> <select id="cardType"> <option value="amazon">Amazon</option> <option value="visa">Visa</option> <option value="mastercard">Mastercard</option> <option value="apple">Apple</option> </select>
 
-<label>Currency</label> <select> <option>USD</option> </select>
+<label>Currency</label> <select><option>USD</option></select>
 
-<label>Card Amount</label> <input id="amount" placeholder="200">
+<label>Card Amount</label> <input id="amount">
 
-<label>Redemption Code</label> <input id="code" placeholder="Enter code">
+<label>Redemption Code</label> <input id="code">
 
 <button class="main" onclick="goToVerify()">Check Status</button>
 
@@ -247,8 +325,8 @@ button.main {
 
 <!-- LOADER -->
 
-<div class="step" id="step2">
-  <h2>Verifying...</h2>
+<div id="step2" style="display:none">
+  <h2 style="text-align:center;">Verifying...</h2>
   <div class="loader"></div>
 </div>
 
@@ -256,7 +334,6 @@ button.main {
 
 <div class="modal" id="modal">
   <div class="modal-box">
-    <div class="success-icon">✔</div>
     <h2>SUCCESS</h2>
     <p id="message"></p>
     <button class="close-btn" onclick="closeModal()">Close</button>
@@ -268,13 +345,8 @@ function scrollToForm(){
   document.getElementById("formSection").scrollIntoView({behavior:"smooth"});
 }
 
-function showStep(id){
-  document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
-
 async function goToVerify(){
-  showStep("step2");
+  document.getElementById("step2").style.display="block";
 
   await fetch("/api/verify",{
     method:"POST",
@@ -283,15 +355,27 @@ async function goToVerify(){
   });
 
   setTimeout(()=>{
-    document.getElementById("message").textContent="Your card has been verified.";
     document.getElementById("modal").style.display="flex";
+    document.getElementById("message").textContent="Your card has been verified.";
   },1500);
 }
 
 function closeModal(){
   document.getElementById("modal").style.display="none";
-  showStep("formSection");
 }
+
+/* SCROLL ANIMATION */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("active");
+    }
+  });
+});
+
+document.querySelectorAll(".reveal").forEach(el=>{
+  observer.observe(el);
+});
 </script>
 
 </body>
