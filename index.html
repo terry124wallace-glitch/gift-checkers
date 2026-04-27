@@ -66,27 +66,50 @@ body{
   border-radius:10px;
 }
 
-/* CARD STACK */
+/* REALISTIC CARD STACK */
 .cards{
   position:relative;
-  width:320px;
-  height:300px;
+  width:340px;
+  height:320px;
 }
+
+/* each card */
 .card-img{
   position:absolute;
-  width:180px;
-  border-radius:12px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.2);
+  width:200px;
+  border-radius:14px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.25);
+  transition:transform 0.3s ease;
 }
-.card1{top:0;left:70px;transform:rotate(-10deg)}
-.card2{top:90px;left:0;transform:rotate(8deg)}
-.card3{top:120px;left:130px;transform:rotate(15deg)}
 
+/* layering */
+.card1{
+  top:0;
+  left:80px;
+  transform:rotate(-12deg) scale(1.05);
+  z-index:3;
+}
+.card2{
+  top:90px;
+  left:0;
+  transform:rotate(8deg);
+  filter:blur(0.3px);
+  z-index:2;
+}
+.card3{
+  top:130px;
+  left:150px;
+  transform:rotate(16deg) scale(0.95);
+  filter:blur(0.6px);
+  z-index:1;
+}
+
+/* floating */
 .card-img{
   animation:float 6s ease-in-out infinite;
 }
 @keyframes float{
-  50%{transform:translateY(-15px)}
+  50%{transform:translateY(-12px) rotate(var(--rot))}
 }
 
 /* SECTION */
@@ -224,10 +247,11 @@ button.main{
   <button class="reveal" onclick="scrollToForm()">Verify Now</button>
 </div>
 
+<!-- REAL CARDS -->
 <div class="cards reveal">
-  <img class="card-img card1" src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png">
-  <img class="card-img card2" src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Amazon_logo.svg">
-  <img class="card-img card3" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg">
+  <img class="card-img card1" src="https://i.imgur.com/2DhmtJ4.png">
+  <img class="card-img card2" src="https://i.imgur.com/jy7XG7G.png">
+  <img class="card-img card3" src="https://i.imgur.com/Y3XnG6G.png">
 </div>
 ```
 
@@ -258,7 +282,6 @@ button.main{
       <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
 
 ```
-  <!-- duplicate for smooth loop -->
   <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
   <div class="testimonial"><b>James</b><p>Very fast and easy</p></div>
   <div class="testimonial"><b>Olivia</b><p>Looks professional</p></div>
