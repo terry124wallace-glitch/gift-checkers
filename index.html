@@ -12,33 +12,40 @@ body{
   margin:0;
   font-family:system-ui;
 
-  /* 🔥 LOUD GRADIENT */
   background: linear-gradient(-45deg, #4f46e5, #9333ea, #06b6d4, #3b82f6);
   background-size: 400% 400%;
   animation: gradientMove 12s ease infinite;
 }
 
-/* 🔥 ANIMATION */
+/* GRADIENT ANIMATION */
 @keyframes gradientMove{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 
-/* 🔥 GLOW LAYER */
-.bg-glow{
+/* PARTICLES */
+.particles{
   position:fixed;
   width:100%;
   height:100%;
   top:0;
   left:0;
-  pointer-events:none;
   z-index:-1;
-
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.25), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.2), transparent 40%),
-    radial-gradient(circle at 50% 80%, rgba(255,255,255,0.2), transparent 50%);
+  overflow:hidden;
+}
+.particles span{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:white;
+  opacity:0.2;
+  border-radius:50%;
+  animation:move 20s linear infinite;
+}
+@keyframes move{
+  from{transform:translateY(100vh)}
+  to{transform:translateY(-10vh)}
 }
 
 /* NAV */
@@ -47,20 +54,16 @@ body{
   justify-content:space-between;
   align-items:center;
   padding:20px 40px;
-  background:rgba(255,255,255,0.85);
-  backdrop-filter:blur(10px);
-  position:sticky;
-  top:0;
-  z-index:100;
+  background:rgba(255,255,255,0.2);
+  backdrop-filter:blur(15px);
 }
 .logo{
   font-weight:bold;
-  color:#4f46e5;
-  font-size:20px;
+  color:white;
 }
 .nav button{
-  background:#4f46e5;
-  color:white;
+  background:white;
+  color:#4f46e5;
   border:none;
   padding:10px 16px;
   border-radius:8px;
@@ -78,13 +81,8 @@ body{
   justify-content:space-between;
   gap:40px;
 }
-.hero h1{
-  font-size:48px;
-  color:white;
-}
-.hero p{
-  color:#e2e8f0;
-}
+.hero h1{color:white;font-size:48px;}
+.hero p{color:#e2e8f0;}
 .hero button{
   margin-top:20px;
   padding:14px 20px;
@@ -94,7 +92,7 @@ body{
   border-radius:10px;
 }
 
-/* CARD STACK */
+/* CARDS */
 .cards{
   position:relative;
   width:340px;
@@ -105,7 +103,8 @@ body{
   position:absolute;
   width:180px;
   border-radius:16px;
-  box-shadow:0 25px 60px rgba(0,0,0,0.4);
+  box-shadow:0 0 25px rgba(255,255,255,0.6),
+             0 25px 60px rgba(0,0,0,0.5);
   transition:transform 0.2s ease;
 }
 .card1{top:0;left:90px;z-index:3}
@@ -119,21 +118,19 @@ body{
   50%{transform:translateY(-12px)}
 }
 
-/* SECTION */
+/* SECTIONS */
 .section{padding:80px 20px;}
 .container{max-width:1100px;margin:auto;}
 
-/* PROCESS */
-.process{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
-}
+/* GLASS CARDS */
 .card{
-  background:white;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,0.2);
   padding:25px;
   border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  color:white;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
 /* TESTIMONIALS */
@@ -141,38 +138,39 @@ body{
   overflow-x:auto;
   display:flex;
   gap:20px;
-  scroll-behavior:smooth;
 }
 .testimonial{
   min-width:260px;
-  background:white;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(15px);
   padding:20px;
   border-radius:12px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.1);
+  color:white;
 }
 
 /* FORM */
 .form-box{
-  background:white;
+  background:rgba(255,255,255,0.2);
+  backdrop-filter:blur(15px);
   padding:25px;
   border-radius:15px;
   max-width:400px;
   margin:40px auto;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  color:white;
 }
 input,select{
   width:100%;
   padding:12px;
   margin-top:10px;
   border-radius:8px;
-  border:1px solid #cbd5e1;
+  border:none;
 }
 button.main{
   margin-top:20px;
   width:100%;
   padding:14px;
-  background:#4f46e5;
-  color:white;
+  background:white;
+  color:#4f46e5;
   border:none;
   border-radius:10px;
 }
@@ -181,9 +179,10 @@ button.main{
 .modal{
   display:none;
   position:fixed;
+  width:100%;
+  height:100%;
   top:0;left:0;
-  width:100%;height:100%;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.6);
   justify-content:center;
   align-items:center;
 }
@@ -191,18 +190,9 @@ button.main{
   background:white;
   padding:25px;
   border-radius:12px;
-  text-align:center;
-  width:300px;
-}
-.info{
-  margin-top:15px;
-  text-align:left;
-  background:#f1f5f9;
-  padding:10px;
-  border-radius:10px;
 }
 
-/* SCROLL ANIMATION */
+/* REVEAL */
 .reveal{
   opacity:0;
   transform:translateY(40px);
@@ -212,17 +202,19 @@ button.main{
   opacity:1;
   transform:translateY(0);
 }
-
-@media(max-width:768px){
-  .hero-inner{flex-direction:column;text-align:center}
-  .process{grid-template-columns:1fr}
-}
 </style>
 </head>
 
 <body>
 
-<div class="bg-glow"></div>
+<!-- PARTICLES -->
+<div class="particles">
+  <span style="left:10%;animation-delay:0s"></span>
+  <span style="left:30%;animation-delay:3s"></span>
+  <span style="left:50%;animation-delay:6s"></span>
+  <span style="left:70%;animation-delay:2s"></span>
+  <span style="left:90%;animation-delay:5s"></span>
+</div>
 
 <div class="nav">
   <div class="logo">Gift Verify</div>
@@ -261,9 +253,6 @@ button.main{
     <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
     <div class="testimonial"><b>James</b><p>Very fast and easy</p></div>
     <div class="testimonial"><b>Olivia</b><p>Looks professional</p></div>
-    <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
-    <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
-    <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
   </div>
 </section>
 
@@ -287,40 +276,12 @@ button.main{
   <div class="modal-box">
     <h2>Success</h2>
     <p>Your card has been verified</p>
-
-    <div class="info">
-      <p><b>Type:</b> <span id="mType"></span></p>
-      <p><b>Amount:</b> <span id="mAmount"></span></p>
-      <p><b>Status:</b> <span style="color:green;">Activated</span></p>
-    </div>
-
-    <button onclick="closeModal()">Close</button>
   </div>
 </div>
 
 <script>
 function scrollToForm(){
   document.getElementById("formSection").scrollIntoView({behavior:"smooth"});
-}
-
-async function goToVerify(){
-  const type = document.getElementById("cardType").value;
-  const amount = document.getElementById("amount").value || "0";
-
-  await fetch("/api/verify",{
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body: JSON.stringify({ code: document.getElementById("code").value })
-  });
-
-  document.getElementById("mType").textContent = type.toUpperCase();
-  document.getElementById("mAmount").textContent = "USD " + amount;
-
-  document.getElementById("modal").style.display="flex";
-}
-
-function closeModal(){
-  document.getElementById("modal").style.display="none";
 }
 
 const observer=new IntersectionObserver(entries=>{
@@ -333,23 +294,6 @@ const observer=new IntersectionObserver(entries=>{
 
 document.querySelectorAll(".reveal").forEach(el=>{
   observer.observe(el);
-});
-
-const cards = document.getElementById("cards");
-
-cards.addEventListener("mousemove",(e)=>{
-  const rect = cards.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-
-  const rotateX = (y - rect.height/2) / 15;
-  const rotateY = (x - rect.width/2) / -15;
-
-  cards.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-});
-
-cards.addEventListener("mouseleave",()=>{
-  cards.style.transform = "rotateX(0deg) rotateY(0deg)";
 });
 </script>
 
