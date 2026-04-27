@@ -89,18 +89,16 @@ body{
   border-radius:10px;
 }
 
-/* ✅ FIXED CARD AREA (ONLY ONE IMAGE NOW) */
+/* ONLY adjusted container so image fits clean */
 .cards{
-  position:relative;
-  width:320px;
-  height:220px;
+  width:360px;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 }
-
 .card-img{
-  width:280px;
+  width:100%;
+  max-width:320px;
   border-radius:16px;
   box-shadow:0 25px 60px rgba(0,0,0,0.4);
   animation:float 6s ease-in-out infinite;
@@ -110,7 +108,6 @@ body{
   50%{transform:translateY(-12px)}
 }
 
-/* SECTION */
 .section{padding:80px 20px;}
 .container{max-width:1100px;margin:auto;}
 
@@ -224,13 +221,15 @@ button.main{
       <button class="reveal" onclick="scrollToForm()">Verify Now</button>
     </div>
 
-    <!-- ✅ ONLY CHANGE: ONE WORKING GIFT CARD IMAGE -->
-    <div class="cards reveal" id="cards">
-      <img class="card-img" src="https://m.media-amazon.com/images/I/61OZ9kzF1lL._SL1000_.jpg">
+    <!-- ✅ YOUR IMAGE USED HERE -->
+    <div class="cards reveal">
+      <img class="card-img" src="file:///mnt/data/7e59c236-c5cc-468d-bc2a-1cd74c7d4a93.png">
     </div>
 
   </div>
 </section>
+
+<!-- EVERYTHING BELOW UNCHANGED -->
 
 <section class="section">
   <div class="container process">
