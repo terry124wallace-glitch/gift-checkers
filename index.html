@@ -52,7 +52,6 @@ body{
 }
 .hero h1{
   font-size:48px;
-  margin-bottom:10px;
 }
 .hero p{
   color:#555;
@@ -73,19 +72,18 @@ body{
   height:320px;
   perspective:1000px;
 }
-
 .card-img{
   position:absolute;
-  width:200px;
-  border-radius:14px;
+  width:220px;
+  border-radius:16px;
   box-shadow:0 25px 60px rgba(0,0,0,0.25);
   transition:transform 0.2s ease;
 }
 
-/* layering */
-.card1{top:0;left:80px;z-index:3}
-.card2{top:90px;left:0;z-index:2}
-.card3{top:130px;left:150px;z-index:1}
+/* positions */
+.card1{top:0;left:90px;z-index:3}
+.card2{top:110px;left:20px;z-index:2}
+.card3{top:140px;left:160px;z-index:1}
 
 /* float */
 .card-img{
@@ -96,13 +94,8 @@ body{
 }
 
 /* SECTION */
-.section{
-  padding:80px 20px;
-}
-.container{
-  max-width:1100px;
-  margin:auto;
-}
+.section{padding:80px 20px;}
+.container{max-width:1100px;margin:auto;}
 
 /* PROCESS */
 .process{
@@ -224,10 +217,11 @@ button.main{
   <button class="reveal" onclick="scrollToForm()">Verify Now</button>
 </div>
 
+<!-- UPDATED CARDS -->
 <div class="cards reveal" id="cards">
-  <img class="card-img card1" src="https://i.imgur.com/2DhmtJ4.png">
-  <img class="card-img card2" src="https://i.imgur.com/jy7XG7G.png">
-  <img class="card-img card3" src="https://i.imgur.com/Y3XnG6G.png">
+  <img class="card-img card1" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg">
+  <img class="card-img card2" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg">
+  <img class="card-img card3" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg">
 </div>
 ```
 
@@ -339,7 +333,7 @@ document.querySelectorAll(".reveal").forEach(el=>{
   observer.observe(el);
 });
 
-/* 3D HOVER EFFECT */
+/* HOVER EFFECT */
 const cards = document.getElementById("cards");
 
 cards.addEventListener("mousemove",(e)=>{
