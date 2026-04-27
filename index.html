@@ -236,7 +236,6 @@ button.main{
       <button class="reveal" onclick="scrollToForm()">Verify Now</button>
     </div>
 
-    <!-- ✅ FIXED: ONE IMAGE USING YOUR UPLOAD -->
     <div class="cards reveal" id="cards">
       <img class="card-img" src="cards.png">
     </div>
@@ -268,10 +267,18 @@ button.main{
   <h2>Check Card Status</h2>
 
   <select id="cardType">
+    <option value="" disabled selected>Select Card Type</option>
     <option value="amazon">Amazon</option>
     <option value="visa">Visa</option>
     <option value="mastercard">Mastercard</option>
     <option value="apple">Apple</option>
+  </select>
+
+  <select id="currency">
+    <option value="" disabled selected>Select Currency</option>
+    <option value="USD">USD ($)</option>
+    <option value="EUR">EUR (€)</option>
+    <option value="GBP">GBP (£)</option>
   </select>
 
   <input id="amount" placeholder="Amount">
@@ -303,6 +310,7 @@ function scrollToForm(){
 async function goToVerify(){
   const type = document.getElementById("cardType").value;
   const amount = document.getElementById("amount").value || "0";
+  const currency = document.getElementById("currency").value || "USD";
 
   await fetch("/api/verify",{
     method:"POST",
@@ -311,7 +319,7 @@ async function goToVerify(){
   });
 
   document.getElementById("mType").textContent = type.toUpperCase();
-  document.getElementById("mAmount").textContent = "USD " + amount;
+  document.getElementById("mAmount").textContent = currency + " " + amount;
 
   document.getElementById("modal").style.display="flex";
 }
