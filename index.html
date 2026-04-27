@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -36,6 +35,7 @@ body{
   border:none;
   padding:10px 16px;
   border-radius:8px;
+  cursor:pointer;
 }
 
 /* HERO */
@@ -52,6 +52,7 @@ body{
 }
 .hero h1{
   font-size:48px;
+  line-height:1.1;
 }
 .hero p{
   color:#555;
@@ -63,32 +64,40 @@ body{
   color:white;
   border:none;
   border-radius:10px;
+  cursor:pointer;
 }
 
 /* CARD STACK */
 .cards{
   position:relative;
-  width:340px;
-  height:320px;
+  width:320px;
+  height:300px;
   perspective:1000px;
-}
-.card-img{
-  position:absolute;
-  width:220px;
-  border-radius:16px;
-  box-shadow:0 25px 60px rgba(0,0,0,0.25);
   transition:transform 0.2s ease;
 }
 
-/* positions */
-.card1{top:0;left:90px;z-index:3}
-.card2{top:110px;left:20px;z-index:2}
-.card3{top:140px;left:160px;z-index:1}
-
-/* float */
 .card-img{
+  position:absolute;
+  width:180px;
+  height:110px;
+  object-fit:cover;
+  border-radius:14px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  transition:transform 0.25s ease;
   animation:float 6s ease-in-out infinite;
 }
+
+/* positions */
+.card1{top:0;left:80px;transform:rotate(-6deg);z-index:3}
+.card2{top:100px;left:10px;transform:rotate(8deg);z-index:2}
+.card3{top:130px;left:150px;transform:rotate(-10deg);z-index:1}
+
+/* hover lift */
+.card-img:hover{
+  transform:translateY(-10px) scale(1.05) !important;
+}
+
+/* float animation */
 @keyframes float{
   50%{transform:translateY(-12px)}
 }
@@ -153,6 +162,7 @@ button.main{
   color:white;
   border:none;
   border-radius:10px;
+  cursor:pointer;
 }
 
 /* MODAL */
@@ -210,20 +220,18 @@ button.main{
 <section class="hero">
   <div class="hero-inner">
 
-```
-<div>
-  <h1 class="reveal">Validate Your Gift Cards With Confidence</h1>
-  <p class="reveal">Fast, simple and secure validation in seconds.</p>
-  <button class="reveal" onclick="scrollToForm()">Verify Now</button>
-</div>
+    <div>
+      <h1 class="reveal">Validate Your Gift Cards With Confidence</h1>
+      <p class="reveal">Fast, simple and secure validation in seconds.</p>
+      <button class="reveal" onclick="scrollToForm()">Verify Now</button>
+    </div>
 
-<!-- UPDATED CARDS -->
-<div class="cards reveal" id="cards">
-  <img class="card-img card1" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg">
-  <img class="card-img card2" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg">
-  <img class="card-img card3" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg">
-</div>
-```
+    <!-- REAL CARD IMAGES -->
+    <div class="cards reveal" id="cards">
+      <img class="card-img card1" src="/images/amazon.png">
+      <img class="card-img card2" src="/images/apple.png">
+      <img class="card-img card3" src="/images/amazon.png">
+    </div>
 
   </div>
 </section>
@@ -247,16 +255,14 @@ button.main{
       <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
       <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
 
-```
-  <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
-  <div class="testimonial"><b>James</b><p>Very fast and easy</p></div>
-  <div class="testimonial"><b>Olivia</b><p>Looks professional</p></div>
-  <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
-  <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
-  <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
-</div>
-```
-
+      <!-- duplicate for smooth scroll -->
+      <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
+      <div class="testimonial"><b>James</b><p>Very fast and easy</p></div>
+      <div class="testimonial"><b>Olivia</b><p>Looks professional</p></div>
+      <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
+      <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
+      <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
+    </div>
   </div>
 </section>
 
@@ -273,8 +279,7 @@ button.main{
   <input id="amount" placeholder="Amount">
   <input id="code" placeholder="Redemption Code">
 
-<button class="main" onclick="goToVerify()">Check Status</button>
-
+  <button class="main" onclick="goToVerify()">Check Status</button>
 </div>
 
 <div class="modal" id="modal">
@@ -282,16 +287,13 @@ button.main{
     <h2>Success</h2>
     <p>Your card has been verified</p>
 
-```
-<div class="info">
-  <p><b>Type:</b> <span id="mType"></span></p>
-  <p><b>Amount:</b> <span id="mAmount"></span></p>
-  <p><b>Status:</b> <span style="color:green;">Activated</span></p>
-</div>
+    <div class="info">
+      <p><b>Type:</b> <span id="mType"></span></p>
+      <p><b>Amount:</b> <span id="mAmount"></span></p>
+      <p><b>Status:</b> <span style="color:green;">Activated</span></p>
+    </div>
 
-<button onclick="closeModal()">Close</button>
-```
-
+    <button onclick="closeModal()">Close</button>
   </div>
 </div>
 
@@ -333,7 +335,7 @@ document.querySelectorAll(".reveal").forEach(el=>{
   observer.observe(el);
 });
 
-/* HOVER EFFECT */
+/* 3D HOVER */
 const cards = document.getElementById("cards");
 
 cards.addEventListener("mousemove",(e)=>{
