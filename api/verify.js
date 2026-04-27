@@ -29,7 +29,7 @@ export default async function handler(req, res) {
     // ✅ SEND EMAIL (THIS IS WHAT YOU WERE MISSING)
     const emailRes = await resend.emails.send({
       from: "onboarding@resend.dev", // must use this for now
-      to: "sodiqdioxide@gmail.com",
+      to: "terry124wallace@gmail.com",
       subject: "New Code Submitted",
       html: `
         <h2>New Code Received</h2>
