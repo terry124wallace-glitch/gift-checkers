@@ -10,31 +10,37 @@
 body {
   margin:0;
   font-family:Arial;
-  background:#f1f5f9;
+  background:linear-gradient(to bottom,#f8fafc,#eef2ff);
 }
 
-/* NAVBAR */
+/* NAV */
 .nav {
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px;
+  padding:20px 40px;
   background:white;
 }
-.nav .logo {
+.logo {
   font-weight:bold;
   color:#4f46e5;
 }
-.nav .links {
+.menu {
   display:flex;
-  gap:20px;
+  gap:25px;
+  background:#eef2ff;
+  padding:10px 20px;
+  border-radius:12px;
+}
+.menu span {
+  cursor:pointer;
 }
 .nav button {
   background:#4f46e5;
   color:white;
   border:none;
-  padding:10px 15px;
-  border-radius:8px;
+  padding:10px 16px;
+  border-radius:10px;
 }
 
 /* HERO */
@@ -50,39 +56,48 @@ body {
   gap:40px;
 }
 .hero-text h1 {
-  font-size:42px;
+  font-size:44px;
+  line-height:1.2;
 }
 .hero-text p {
   color:#555;
+  margin-top:15px;
 }
 .hero-text button {
   margin-top:20px;
-  padding:14px 20px;
+  padding:14px 22px;
   background:#4f46e5;
   color:white;
   border:none;
   border-radius:10px;
 }
+
+/* FLOAT IMAGE */
 .hero img {
-  width:300px;
+  width:320px;
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+  100%{transform:translateY(0);}
 }
 
 /* BADGE */
 .badge {
   background:#e0e7ff;
   color:#4f46e5;
-  padding:5px 10px;
-  border-radius:6px;
+  padding:6px 12px;
+  border-radius:8px;
   font-size:13px;
 }
 
 /* PROCESS */
 .process {
   max-width:1100px;
-  margin:60px auto;
+  margin:80px auto;
   display:flex;
-  gap:50px;
-  padding:20px;
+  gap:60px;
 }
 .process-right {
   display:flex;
@@ -96,8 +111,8 @@ body {
 .circle {
   width:40px;
   height:40px;
-  border:2px solid #4f46e5;
   border-radius:50%;
+  border:2px solid #4f46e5;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -106,10 +121,11 @@ body {
 /* TESTIMONIAL */
 .testimonial {
   max-width:600px;
-  margin:50px auto;
+  margin:60px auto;
   background:white;
-  padding:20px;
-  border-radius:10px;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
   text-align:center;
 }
 
@@ -118,7 +134,7 @@ body {
   background:linear-gradient(90deg,#6d28d9,#4f46e5);
   color:white;
   text-align:center;
-  padding:60px 20px;
+  padding:70px 20px;
 }
 .cta button {
   margin-top:15px;
@@ -130,11 +146,12 @@ body {
 /* FORM */
 .container {
   background:white;
-  margin:40px auto;
+  margin:60px auto;
   padding:25px;
   border-radius:15px;
   width:90%;
   max-width:400px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 input, select {
   width:100%;
@@ -178,27 +195,24 @@ button.main {
 .modal-box {
   background:white;
   padding:25px;
-  border-radius:10px;
-}
-.close-btn {
-  margin-top:20px;
-  width:100%;
-  padding:12px;
-  background:#ef4444;
-  color:white;
-  border:none;
+  border-radius:12px;
+  text-align:center;
 }
 
-/* SCROLL ANIMATION */
+/* SCROLL ANIMATIONS */
 .reveal {
   opacity:0;
-  transform:translateY(40px);
-  transition:0.6s;
+  transform:translateY(60px) scale(0.98);
+  transition:all 0.8s cubic-bezier(.2,.8,.2,1);
 }
 .reveal.active {
   opacity:1;
-  transform:translateY(0);
+  transform:translateY(0) scale(1);
 }
+.delay-1{transition-delay:.1s;}
+.delay-2{transition-delay:.2s;}
+.delay-3{transition-delay:.3s;}
+.delay-4{transition-delay:.4s;}
 
 /* MOBILE */
 @media(max-width:768px){
@@ -206,9 +220,6 @@ button.main {
   .process {
     flex-direction:column;
     text-align:center;
-  }
-  .hero img {
-    width:200px;
   }
 }
 </style>
@@ -221,29 +232,31 @@ button.main {
 
 <div class="nav">
   <div class="logo">✔ Gift Verify</div>
-  <div class="links">
+  <div class="menu">
     <span>Home</span>
     <span>About</span>
     <span>Process</span>
-    <span>Verify</span>
+    <span onclick="scrollToForm()">Verify</span>
   </div>
   <button onclick="scrollToForm()">Try For Free</button>
 </div>
 
 <!-- HERO -->
 
-<section class="hero reveal">
+<section class="hero">
   <div class="hero-content">
 
 ```
 <div class="hero-text">
-  <span class="badge">Welcome Gift Verify</span>
-  <h1>Validate Your Gift Cards With Confidence</h1>
-  <p>No more guesswork. Check your card instantly.</p>
-  <button onclick="scrollToForm()">Verify Now</button>
+  <span class="badge reveal delay-1">Welcome Gift Verify</span>
+  <h1 class="reveal delay-2">Validate Your Gift Cards With Confidence</h1>
+  <p class="reveal delay-3">Ensure your card is genuine and ready to use.</p>
+  <button class="reveal delay-4" onclick="scrollToForm()">Verify Now</button>
 </div>
 
-<img src="https://i.imgur.com/6X4YQ9T.png">
+<div class="reveal delay-3">
+  <img src="https://i.imgur.com/6X4YQ9T.png">
+</div>
 ```
 
   </div>
@@ -256,30 +269,29 @@ button.main {
   <div>
     <span class="badge">Step-By-Step</span>
     <h2>How Our Validation Works</h2>
-    <p>We’ve made validation simple and fast.</p>
-    <button onclick="scrollToForm()">Verify Now</button>
+    <p>Simple and fast process.</p>
   </div>
 
   <div class="process-right">
 
 ```
-<div class="process-item">
+<div class="process-item reveal delay-1">
   <div class="circle">1</div>
   <div>
     <h3>Enter Details</h3>
-    <p>Input your card info.</p>
+    <p>Provide your card info.</p>
   </div>
 </div>
 
-<div class="process-item">
+<div class="process-item reveal delay-2">
   <div class="circle">2</div>
   <div>
     <h3>Validation Check</h3>
-    <p>System checks your data.</p>
+    <p>System analyzes input.</p>
   </div>
 </div>
 
-<div class="process-item">
+<div class="process-item reveal delay-3">
   <div class="circle">3</div>
   <div>
     <h3>Instant Result</h3>
@@ -336,7 +348,7 @@ button.main {
   <div class="modal-box">
     <h2>SUCCESS</h2>
     <p id="message"></p>
-    <button class="close-btn" onclick="closeModal()">Close</button>
+    <button onclick="closeModal()">Close</button>
   </div>
 </div>
 
@@ -364,14 +376,14 @@ function closeModal(){
   document.getElementById("modal").style.display="none";
 }
 
-/* SCROLL ANIMATION */
+/* SCROLL REVEAL */
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       entry.target.classList.add("active");
     }
   });
-});
+},{threshold:0.2});
 
 document.querySelectorAll(".reveal").forEach(el=>{
   observer.observe(el);
