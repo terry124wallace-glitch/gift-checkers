@@ -17,7 +17,7 @@ body{
   animation: gradientMove 12s ease infinite;
 }
 
-/* GRADIENT ANIMATION */
+/* GRADIENT */
 @keyframes gradientMove{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
@@ -32,7 +32,6 @@ body{
   top:0;
   left:0;
   z-index:-1;
-  overflow:hidden;
 }
 .particles span{
   position:absolute;
@@ -52,15 +51,11 @@ body{
 .nav{
   display:flex;
   justify-content:space-between;
-  align-items:center;
   padding:20px 40px;
   background:rgba(255,255,255,0.2);
   backdrop-filter:blur(15px);
 }
-.logo{
-  font-weight:bold;
-  color:white;
-}
+.logo{color:white;font-weight:bold}
 .nav button{
   background:white;
   color:#4f46e5;
@@ -79,70 +74,68 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:40px;
 }
 .hero h1{color:white;font-size:48px;}
-.hero p{color:#e2e8f0;}
-.hero button{
-  margin-top:20px;
-  padding:14px 20px;
-  background:white;
-  color:#4f46e5;
-  border:none;
-  border-radius:10px;
-}
+.hero p{color:#e2e8f0}
 
 /* CARDS */
 .cards{
   position:relative;
   width:340px;
   height:320px;
-  perspective:1000px;
+  perspective:1200px;
 }
-.card-img{
+.card-wrap{
   position:absolute;
   width:180px;
+  height:110px;
   border-radius:16px;
-  box-shadow:0 0 25px rgba(255,255,255,0.6),
-             0 25px 60px rgba(0,0,0,0.5);
-  transition:transform 0.2s ease;
+  overflow:hidden;
 }
 .card1{top:0;left:90px;z-index:3}
 .card2{top:110px;left:20px;z-index:2}
 .card3{top:140px;left:160px;z-index:1}
 
 .card-img{
-  animation:float 6s ease-in-out infinite;
-}
-@keyframes float{
-  50%{transform:translateY(-12px)}
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-/* SECTIONS */
-.section{padding:80px 20px;}
-.container{max-width:1100px;margin:auto;}
+/* REFLECTION */
+.shine{
+  position:absolute;
+  width:200%;
+  height:200%;
+  background:linear-gradient(
+    120deg,
+    rgba(255,255,255,0.1) 0%,
+    rgba(255,255,255,0.5) 50%,
+    rgba(255,255,255,0.1) 100%
+  );
+  transform:translate(-100%,-100%) rotate(25deg);
+  pointer-events:none;
+}
 
-/* GLASS CARDS */
+/* GLASS */
 .card{
   background:rgba(255,255,255,0.15);
   backdrop-filter:blur(15px);
-  border:1px solid rgba(255,255,255,0.2);
   padding:25px;
   border-radius:12px;
   color:white;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  margin:20px;
 }
 
 /* TESTIMONIALS */
 .slider{
-  overflow-x:auto;
   display:flex;
+  overflow-x:auto;
   gap:20px;
 }
 .testimonial{
   min-width:260px;
   background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(15px);
   padding:20px;
   border-radius:12px;
   color:white;
@@ -165,32 +158,6 @@ input,select{
   border-radius:8px;
   border:none;
 }
-button.main{
-  margin-top:20px;
-  width:100%;
-  padding:14px;
-  background:white;
-  color:#4f46e5;
-  border:none;
-  border-radius:10px;
-}
-
-/* MODAL */
-.modal{
-  display:none;
-  position:fixed;
-  width:100%;
-  height:100%;
-  top:0;left:0;
-  background:rgba(0,0,0,0.6);
-  justify-content:center;
-  align-items:center;
-}
-.modal-box{
-  background:white;
-  padding:25px;
-  border-radius:12px;
-}
 
 /* REVEAL */
 .reveal{
@@ -209,11 +176,11 @@ button.main{
 
 <!-- PARTICLES -->
 <div class="particles">
-  <span style="left:10%;animation-delay:0s"></span>
-  <span style="left:30%;animation-delay:3s"></span>
-  <span style="left:50%;animation-delay:6s"></span>
-  <span style="left:70%;animation-delay:2s"></span>
-  <span style="left:90%;animation-delay:5s"></span>
+  <span style="left:10%"></span>
+  <span style="left:30%"></span>
+  <span style="left:50%"></span>
+  <span style="left:70%"></span>
+  <span style="left:90%"></span>
 </div>
 
 <div class="nav">
@@ -227,73 +194,55 @@ button.main{
     <div>
       <h1 class="reveal">Validate Your Gift Cards With Confidence</h1>
       <p class="reveal">Fast, simple and secure validation in seconds.</p>
-      <button class="reveal" onclick="scrollToForm()">Verify Now</button>
     </div>
 
+    <!-- CARDS -->
     <div class="cards reveal" id="cards">
-      <img class="card-img card1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/512px-Amazon_logo.svg.png">
-      <img class="card-img card2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/505px-Apple_logo_black.svg.png">
-      <img class="card-img card3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/512px-Amazon_logo.svg.png">
+
+      <div class="card-wrap card1">
+        <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/512px-Amazon_logo.svg.png">
+        <div class="shine"></div>
+      </div>
+
+      <div class="card-wrap card2">
+        <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/505px-Apple_logo_black.svg.png">
+        <div class="shine"></div>
+      </div>
+
+      <div class="card-wrap card3">
+        <img class="card-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/512px-Amazon_logo.svg.png">
+        <div class="shine"></div>
+      </div>
+
     </div>
 
   </div>
 </section>
-
-<section class="section">
-  <div class="container process">
-    <div class="card reveal"><h3>1. Enter Details</h3><p>Input your card info easily.</p></div>
-    <div class="card reveal"><h3>2. Validation</h3><p>System checks instantly.</p></div>
-    <div class="card reveal"><h3>3. Secure</h3><p>Your data is protected.</p></div>
-    <div class="card reveal"><h3>4. Result</h3><p>Instant confirmation.</p></div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container slider reveal">
-    <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
-    <div class="testimonial"><b>James</b><p>Very fast and easy</p></div>
-    <div class="testimonial"><b>Olivia</b><p>Looks professional</p></div>
-  </div>
-</section>
-
-<div id="formSection" class="form-box reveal">
-  <h2>Check Card Status</h2>
-
-  <select id="cardType">
-    <option value="amazon">Amazon</option>
-    <option value="visa">Visa</option>
-    <option value="mastercard">Mastercard</option>
-    <option value="apple">Apple</option>
-  </select>
-
-  <input id="amount" placeholder="Amount">
-  <input id="code" placeholder="Redemption Code">
-
-  <button class="main" onclick="goToVerify()">Check Status</button>
-</div>
-
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <h2>Success</h2>
-    <p>Your card has been verified</p>
-  </div>
-</div>
 
 <script>
-function scrollToForm(){
-  document.getElementById("formSection").scrollIntoView({behavior:"smooth"});
-}
-
+/* REVEAL */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       e.target.classList.add("active");
     }
   });
-},{threshold:0.2});
+});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-document.querySelectorAll(".reveal").forEach(el=>{
-  observer.observe(el);
+/* REFLECTION FOLLOW MOUSE */
+const cards = document.getElementById("cards");
+cards.addEventListener("mousemove",(e)=>{
+  document.querySelectorAll(".shine").forEach(shine=>{
+    shine.style.transform =
+      `translate(${e.offsetX}px, ${e.offsetY}px) rotate(25deg)`;
+  });
+});
+
+/* PARALLAX */
+window.addEventListener("scroll",()=>{
+  const scroll = window.scrollY;
+  cards.style.transform = `translateY(${scroll * -0.05}px)`;
 });
 </script>
 
