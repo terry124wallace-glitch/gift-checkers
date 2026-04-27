@@ -66,50 +66,33 @@ body{
   border-radius:10px;
 }
 
-/* REALISTIC CARD STACK */
+/* CARD STACK */
 .cards{
   position:relative;
   width:340px;
   height:320px;
+  perspective:1000px;
 }
 
-/* each card */
 .card-img{
   position:absolute;
   width:200px;
   border-radius:14px;
   box-shadow:0 25px 60px rgba(0,0,0,0.25);
-  transition:transform 0.3s ease;
+  transition:transform 0.2s ease;
 }
 
 /* layering */
-.card1{
-  top:0;
-  left:80px;
-  transform:rotate(-12deg) scale(1.05);
-  z-index:3;
-}
-.card2{
-  top:90px;
-  left:0;
-  transform:rotate(8deg);
-  filter:blur(0.3px);
-  z-index:2;
-}
-.card3{
-  top:130px;
-  left:150px;
-  transform:rotate(16deg) scale(0.95);
-  filter:blur(0.6px);
-  z-index:1;
-}
+.card1{top:0;left:80px;z-index:3}
+.card2{top:90px;left:0;z-index:2}
+.card3{top:130px;left:150px;z-index:1}
 
-/* floating */
+/* float */
 .card-img{
   animation:float 6s ease-in-out infinite;
 }
 @keyframes float{
-  50%{transform:translateY(-12px) rotate(var(--rot))}
+  50%{transform:translateY(-12px)}
 }
 
 /* SECTION */
@@ -134,10 +117,8 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* TESTIMONIAL SLIDER */
-.slider{
-  overflow:hidden;
-}
+/* TESTIMONIALS */
+.slider{overflow:hidden;}
 .slider-track{
   display:flex;
   gap:20px;
@@ -228,14 +209,10 @@ button.main{
 
 <body>
 
-<!-- NAV -->
-
 <div class="nav">
   <div class="logo">Gift Verify</div>
   <button onclick="scrollToForm()">Try Now</button>
 </div>
-
-<!-- HERO -->
 
 <section class="hero">
   <div class="hero-inner">
@@ -247,8 +224,7 @@ button.main{
   <button class="reveal" onclick="scrollToForm()">Verify Now</button>
 </div>
 
-<!-- REAL CARDS -->
-<div class="cards reveal">
+<div class="cards reveal" id="cards">
   <img class="card-img card1" src="https://i.imgur.com/2DhmtJ4.png">
   <img class="card-img card2" src="https://i.imgur.com/jy7XG7G.png">
   <img class="card-img card3" src="https://i.imgur.com/Y3XnG6G.png">
@@ -258,8 +234,6 @@ button.main{
   </div>
 </section>
 
-<!-- PROCESS -->
-
 <section class="section">
   <div class="container process">
     <div class="card reveal"><h3>1. Enter Details</h3><p>Input your card info easily.</p></div>
@@ -268,8 +242,6 @@ button.main{
     <div class="card reveal"><h3>4. Result</h3><p>Instant confirmation.</p></div>
   </div>
 </section>
-
-<!-- TESTIMONIALS -->
 
 <section class="section">
   <div class="container slider reveal">
@@ -294,8 +266,6 @@ button.main{
   </div>
 </section>
 
-<!-- FORM -->
-
 <div id="formSection" class="form-box reveal">
   <h2>Check Card Status</h2>
 
@@ -312,8 +282,6 @@ button.main{
 <button class="main" onclick="goToVerify()">Check Status</button>
 
 </div>
-
-<!-- MODAL -->
 
 <div class="modal" id="modal">
   <div class="modal-box">
@@ -369,6 +337,24 @@ const observer=new IntersectionObserver(entries=>{
 
 document.querySelectorAll(".reveal").forEach(el=>{
   observer.observe(el);
+});
+
+/* 3D HOVER EFFECT */
+const cards = document.getElementById("cards");
+
+cards.addEventListener("mousemove",(e)=>{
+  const rect = cards.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const rotateX = (y - rect.height/2) / 15;
+  const rotateY = (x - rect.width/2) / -15;
+
+  cards.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+});
+
+cards.addEventListener("mouseleave",()=>{
+  cards.style.transform = "rotateX(0deg) rotateY(0deg)";
 });
 </script>
 
