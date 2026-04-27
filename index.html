@@ -7,64 +7,55 @@
 <title>Gift Verify</title>
 
 <style>
-body {
+*{box-sizing:border-box}
+body{
   margin:0;
-  font-family:Arial;
-  background:linear-gradient(to bottom,#f8fafc,#eef2ff);
+  font-family:system-ui, -apple-system, sans-serif;
+  background:#f9fafb;
+  color:#111;
 }
 
 /* NAV */
-.nav {
+.nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:20px 40px;
-  background:white;
+  position:sticky;
+  top:0;
+  background:rgba(255,255,255,0.8);
+  backdrop-filter:blur(10px);
 }
-.logo {
-  font-weight:bold;
-  color:#4f46e5;
-}
-.menu {
-  display:flex;
-  gap:25px;
-  background:#eef2ff;
-  padding:10px 20px;
-  border-radius:12px;
-}
-.menu span {
-  cursor:pointer;
-}
-.nav button {
+.logo{font-weight:700;color:#4f46e5}
+.nav button{
   background:#4f46e5;
   color:white;
   border:none;
   padding:10px 16px;
-  border-radius:10px;
+  border-radius:8px;
 }
 
 /* HERO */
-.hero {
-  padding:80px 20px;
+.hero{
+  padding:100px 20px;
 }
-.hero-content {
+.hero-inner{
   max-width:1100px;
   margin:auto;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:40px;
+  gap:50px;
 }
-.hero-text h1 {
-  font-size:44px;
+.hero h1{
+  font-size:48px;
   line-height:1.2;
 }
-.hero-text p {
-  color:#555;
+.hero p{
   margin-top:15px;
+  color:#555;
 }
-.hero-text button {
-  margin-top:20px;
+.hero button{
+  margin-top:25px;
   padding:14px 22px;
   background:#4f46e5;
   color:white;
@@ -73,94 +64,69 @@ body {
 }
 
 /* FLOAT IMAGE */
-.hero img {
-  width:320px;
+.hero img{
+  width:340px;
   animation:float 6s ease-in-out infinite;
 }
-@keyframes float {
-  0%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
-  100%{transform:translateY(0);}
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+  100%{transform:translateY(0)}
 }
 
-/* BADGE */
-.badge {
-  background:#e0e7ff;
-  color:#4f46e5;
-  padding:6px 12px;
-  border-radius:8px;
-  font-size:13px;
+/* SECTION */
+.section{
+  padding:80px 20px;
+}
+.container{
+  max-width:1100px;
+  margin:auto;
 }
 
 /* PROCESS */
-.process {
-  max-width:1100px;
-  margin:80px auto;
-  display:flex;
-  gap:60px;
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
 }
-.process-right {
-  display:flex;
-  flex-direction:column;
-  gap:30px;
-}
-.process-item {
-  display:flex;
-  gap:15px;
-}
-.circle {
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  border:2px solid #4f46e5;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-/* TESTIMONIAL */
-.testimonial {
-  max-width:600px;
-  margin:60px auto;
+.card{
   background:white;
   padding:25px;
-  border-radius:12px;
+  border-radius:14px;
   box-shadow:0 10px 30px rgba(0,0,0,0.05);
-  text-align:center;
 }
 
 /* CTA */
-.cta {
+.cta{
   background:linear-gradient(90deg,#6d28d9,#4f46e5);
   color:white;
   text-align:center;
-  padding:70px 20px;
+  padding:80px 20px;
 }
-.cta button {
-  margin-top:15px;
+.cta button{
+  margin-top:20px;
   padding:14px;
   border:none;
   border-radius:10px;
 }
 
 /* FORM */
-.container {
+.form-box{
   background:white;
-  margin:60px auto;
   padding:25px;
-  border-radius:15px;
-  width:90%;
+  border-radius:14px;
   max-width:400px;
+  margin:auto;
   box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
-input, select {
+input,select{
   width:100%;
   padding:12px;
-  margin-top:8px;
+  margin-top:10px;
   border-radius:8px;
-  border:1px solid #cbd5e1;
+  border:1px solid #ddd;
 }
-button.main {
+button.main{
   margin-top:20px;
   width:100%;
   padding:14px;
@@ -170,20 +136,8 @@ button.main {
   border-radius:10px;
 }
 
-/* LOADER */
-.loader {
-  border:4px solid #e2e8f0;
-  border-top:4px solid #4f46e5;
-  border-radius:50%;
-  width:35px;
-  height:35px;
-  margin:40px auto;
-  animation:spin 1s linear infinite;
-}
-@keyframes spin {100%{transform:rotate(360deg);}}
-
 /* MODAL */
-.modal {
+.modal{
   display:none;
   position:fixed;
   top:0;left:0;
@@ -192,34 +146,36 @@ button.main {
   justify-content:center;
   align-items:center;
 }
-.modal-box {
+.modal-box{
   background:white;
   padding:25px;
   border-radius:12px;
   text-align:center;
 }
 
-/* SCROLL ANIMATIONS */
-.reveal {
+/* SCROLL ANIMATION */
+.reveal{
   opacity:0;
-  transform:translateY(60px) scale(0.98);
+  transform:translateY(60px);
   transition:all 0.8s cubic-bezier(.2,.8,.2,1);
 }
-.reveal.active {
+.reveal.active{
   opacity:1;
-  transform:translateY(0) scale(1);
+  transform:translateY(0);
 }
-.delay-1{transition-delay:.1s;}
-.delay-2{transition-delay:.2s;}
-.delay-3{transition-delay:.3s;}
-.delay-4{transition-delay:.4s;}
+.delay-1{transition-delay:.1s}
+.delay-2{transition-delay:.2s}
+.delay-3{transition-delay:.3s}
+.delay-4{transition-delay:.4s}
 
 /* MOBILE */
 @media(max-width:768px){
-  .hero-content,
-  .process {
+  .hero-inner{
     flex-direction:column;
     text-align:center;
+  }
+  .grid{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -231,122 +187,93 @@ button.main {
 <!-- NAV -->
 
 <div class="nav">
-  <div class="logo">✔ Gift Verify</div>
-  <div class="menu">
-    <span>Home</span>
-    <span>About</span>
-    <span>Process</span>
-    <span onclick="scrollToForm()">Verify</span>
-  </div>
-  <button onclick="scrollToForm()">Try For Free</button>
+  <div class="logo">Gift Verify</div>
+  <button onclick="scrollToForm()">Try Now</button>
 </div>
 
 <!-- HERO -->
 
 <section class="hero">
-  <div class="hero-content">
+  <div class="hero-inner">
 
 ```
-<div class="hero-text">
-  <span class="badge reveal delay-1">Welcome Gift Verify</span>
-  <h1 class="reveal delay-2">Validate Your Gift Cards With Confidence</h1>
-  <p class="reveal delay-3">Ensure your card is genuine and ready to use.</p>
-  <button class="reveal delay-4" onclick="scrollToForm()">Verify Now</button>
+<div>
+  <h1 class="reveal delay-1">Validate Your Gift Cards With Confidence</h1>
+  <p class="reveal delay-2">Fast, simple and secure validation in seconds.</p>
+  <button class="reveal delay-3" onclick="scrollToForm()">Verify Now</button>
 </div>
 
-<div class="reveal delay-3">
-  <img src="https://i.imgur.com/6X4YQ9T.png">
-</div>
+<img class="reveal delay-4" src="https://i.imgur.com/6X4YQ9T.png">
 ```
 
   </div>
 </section>
 
-<!-- PROCESS -->
+<!-- FEATURES -->
 
-<section class="process reveal">
-
-  <div>
-    <span class="badge">Step-By-Step</span>
-    <h2>How Our Validation Works</h2>
-    <p>Simple and fast process.</p>
-  </div>
-
-  <div class="process-right">
+<section class="section">
+  <div class="container grid">
 
 ```
-<div class="process-item reveal delay-1">
-  <div class="circle">1</div>
-  <div>
-    <h3>Enter Details</h3>
-    <p>Provide your card info.</p>
-  </div>
+<div class="card reveal delay-1">
+  <h3>Enter Card Details</h3>
+  <p>Provide your card information to begin validation.</p>
 </div>
 
-<div class="process-item reveal delay-2">
-  <div class="circle">2</div>
-  <div>
-    <h3>Validation Check</h3>
-    <p>System analyzes input.</p>
-  </div>
+<div class="card reveal delay-2">
+  <h3>Secure Validation</h3>
+  <p>Our system analyzes the data instantly.</p>
 </div>
 
-<div class="process-item reveal delay-3">
-  <div class="circle">3</div>
-  <div>
-    <h3>Instant Result</h3>
-    <p>Get confirmation instantly.</p>
-  </div>
+<div class="card reveal delay-3">
+  <h3>Instant Result</h3>
+  <p>Get a clear response immediately.</p>
+</div>
+
+<div class="card reveal delay-4">
+  <h3>Safe Process</h3>
+  <p>Your data stays private and secure.</p>
 </div>
 ```
 
   </div>
-
 </section>
-
-<!-- TESTIMONIAL -->
-
-<div class="testimonial reveal">
-  <b>Emily White</b>
-  <p>Helped me avoid a fake card</p>
-</div>
 
 <!-- CTA -->
 
 <section class="cta reveal">
-  <h2>Verify Your Gift Card Today</h2>
+  <h2>Start Verifying Your Card Now</h2>
   <button onclick="scrollToForm()">Get Started</button>
 </section>
 
 <!-- FORM -->
 
-<div id="formSection" class="container reveal">
-  <h2>Check Card Status</h2>
+<section class="section" id="formSection">
+  <div class="form-box reveal">
+    <h2>Check Card Status</h2>
 
-<label>Card Type</label> <select id="cardType"> <option value="amazon">Amazon</option> <option value="visa">Visa</option> <option value="mastercard">Mastercard</option> <option value="apple">Apple</option> </select>
+```
+<select id="cardType">
+  <option>Amazon</option>
+  <option>Visa</option>
+  <option>Mastercard</option>
+  <option>Apple</option>
+</select>
 
-<label>Currency</label> <select><option>USD</option></select>
-
-<label>Card Amount</label> <input id="amount">
-
-<label>Redemption Code</label> <input id="code">
+<input id="amount" placeholder="Amount">
+<input id="code" placeholder="Redemption Code">
 
 <button class="main" onclick="goToVerify()">Check Status</button>
+```
 
-</div>
-
-<!-- LOADER -->
-
-<div id="step2" style="display:none">
-  <h2 style="text-align:center;">Verifying...</h2>
-  <div class="loader"></div>
-</div>
+  </div>
+</section>
 
 <!-- MODAL -->
 
 <div class="modal" id="modal">
   <div class="modal-box">
-    <h2>SUCCESS</h2>
+    <h2>Success</h2>
     <p id="message"></p>
     <button onclick="closeModal()">Close</button>
   </div>
@@ -358,36 +285,30 @@ function scrollToForm(){
 }
 
 async function goToVerify(){
-  document.getElementById("step2").style.display="block";
-
   await fetch("/api/verify",{
     method:"POST",
     headers:{ "Content-Type":"application/json" },
     body: JSON.stringify({ code: document.getElementById("code").value })
   });
 
-  setTimeout(()=>{
-    document.getElementById("modal").style.display="flex";
-    document.getElementById("message").textContent="Your card has been verified.";
-  },1500);
+  document.getElementById("modal").style.display="flex";
+  document.getElementById("message").textContent="Card checked successfully.";
 }
 
 function closeModal(){
   document.getElementById("modal").style.display="none";
 }
 
-/* SCROLL REVEAL */
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("active");
+/* SCROLL */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("active");
     }
   });
 },{threshold:0.2});
 
-document.querySelectorAll(".reveal").forEach(el=>{
-  observer.observe(el);
-});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 </script>
 
 </body>
