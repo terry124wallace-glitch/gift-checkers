@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -74,18 +73,16 @@ body{
 }
 .card-img{
   position:absolute;
-  width:220px;
+  width:180px; /* slightly reduced */
   border-radius:16px;
   box-shadow:0 25px 60px rgba(0,0,0,0.25);
   transition:transform 0.2s ease;
 }
 
-/* positions */
 .card1{top:0;left:90px;z-index:3}
 .card2{top:110px;left:20px;z-index:2}
 .card3{top:140px;left:160px;z-index:1}
 
-/* float */
 .card-img{
   animation:float 6s ease-in-out infinite;
 }
@@ -110,23 +107,28 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* TESTIMONIALS */
-.slider{overflow:hidden;}
-.slider-track{
+/* ✅ TESTIMONIALS FIXED */
+.slider{
+  overflow-x:auto;
   display:flex;
   gap:20px;
-  animation:scroll 25s linear infinite;
+  scroll-behavior:smooth;
+  padding-bottom:10px;
+}
+.slider::-webkit-scrollbar{
+  height:6px;
+}
+.slider::-webkit-scrollbar-thumb{
+  background:#cbd5e1;
+  border-radius:10px;
 }
 .testimonial{
   min-width:260px;
+  flex:0 0 auto;
   background:white;
   padding:20px;
   border-radius:12px;
   box-shadow:0 10px 20px rgba(0,0,0,0.05);
-}
-@keyframes scroll{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-50%)}
 }
 
 /* FORM */
@@ -191,13 +193,11 @@ button.main{
   transform:translateY(0);
 }
 
-/* MOBILE */
 @media(max-width:768px){
   .hero-inner{flex-direction:column;text-align:center}
   .process{grid-template-columns:1fr}
 }
 </style>
-
 </head>
 
 <body>
@@ -210,20 +210,17 @@ button.main{
 <section class="hero">
   <div class="hero-inner">
 
-```
-<div>
-  <h1 class="reveal">Validate Your Gift Cards With Confidence</h1>
-  <p class="reveal">Fast, simple and secure validation in seconds.</p>
-  <button class="reveal" onclick="scrollToForm()">Verify Now</button>
-</div>
+    <div>
+      <h1 class="reveal">Validate Your Gift Cards With Confidence</h1>
+      <p class="reveal">Fast, simple and secure validation in seconds.</p>
+      <button class="reveal" onclick="scrollToForm()">Verify Now</button>
+    </div>
 
-<!-- UPDATED CARDS -->
-<div class="cards reveal" id="cards">
-  <img class="card-img card1" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg">
-  <img class="card-img card2" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg">
-  <img class="card-img card3" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg">
-</div>
-```
+    <div class="cards reveal" id="cards">
+      <img class="card-img card1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/512px-Amazon_logo.svg.png">
+      <img class="card-img card2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/505px-Apple_logo_black.svg.png">
+      <img class="card-img card3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/512px-Amazon_logo.svg.png">
+    </div>
 
   </div>
 </section>
@@ -237,26 +234,17 @@ button.main{
   </div>
 </section>
 
+<!-- ✅ UPDATED TESTIMONIALS -->
 <section class="section">
   <div class="container slider reveal">
-    <div class="slider-track">
-      <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
-      <div class="testimonial"><b>James</b><p>Very fast and easy</p></div>
-      <div class="testimonial"><b>Olivia</b><p>Looks professional</p></div>
-      <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
-      <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
-      <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
-
-```
-  <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
-  <div class="testimonial"><b>James</b><p>Very fast and easy</p></div>
-  <div class="testimonial"><b>Olivia</b><p>Looks professional</p></div>
-  <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
-  <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
-  <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
-</div>
-```
-
+    <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
+    <div class="testimonial"><b>James</b><p>Very fast and easy</p></div>
+    <div class="testimonial"><b>Olivia</b><p>Looks professional</p></div>
+    <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
+    <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
+    <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
+    <div class="testimonial"><b>Daniel</b><p>Super smooth UI</p></div>
+    <div class="testimonial"><b>Sophia</b><p>Actually helpful</p></div>
   </div>
 </section>
 
@@ -273,8 +261,7 @@ button.main{
   <input id="amount" placeholder="Amount">
   <input id="code" placeholder="Redemption Code">
 
-<button class="main" onclick="goToVerify()">Check Status</button>
-
+  <button class="main" onclick="goToVerify()">Check Status</button>
 </div>
 
 <div class="modal" id="modal">
@@ -282,16 +269,13 @@ button.main{
     <h2>Success</h2>
     <p>Your card has been verified</p>
 
-```
-<div class="info">
-  <p><b>Type:</b> <span id="mType"></span></p>
-  <p><b>Amount:</b> <span id="mAmount"></span></p>
-  <p><b>Status:</b> <span style="color:green;">Activated</span></p>
-</div>
+    <div class="info">
+      <p><b>Type:</b> <span id="mType"></span></p>
+      <p><b>Amount:</b> <span id="mAmount"></span></p>
+      <p><b>Status:</b> <span style="color:green;">Activated</span></p>
+    </div>
 
-<button onclick="closeModal()">Close</button>
-```
-
+    <button onclick="closeModal()">Close</button>
   </div>
 </div>
 
@@ -320,7 +304,6 @@ function closeModal(){
   document.getElementById("modal").style.display="none";
 }
 
-/* SCROLL ANIMATION */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
@@ -333,7 +316,6 @@ document.querySelectorAll(".reveal").forEach(el=>{
   observer.observe(el);
 });
 
-/* HOVER EFFECT */
 const cards = document.getElementById("cards");
 
 cards.addEventListener("mousemove",(e)=>{
