@@ -7,10 +7,38 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:system-ui;
-  background:#f8fafc;
+
+  /* 🔥 LOUD GRADIENT */
+  background: linear-gradient(-45deg, #4f46e5, #9333ea, #06b6d4, #3b82f6);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+
+/* 🔥 ANIMATION */
+@keyframes gradientMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* 🔥 GLOW LAYER */
+.bg-glow{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  pointer-events:none;
+  z-index:-1;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.25), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.2), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(255,255,255,0.2), transparent 50%);
 }
 
 /* NAV */
@@ -19,7 +47,8 @@ body{
   justify-content:space-between;
   align-items:center;
   padding:20px 40px;
-  background:white;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(10px);
   position:sticky;
   top:0;
   z-index:100;
@@ -51,15 +80,16 @@ body{
 }
 .hero h1{
   font-size:48px;
+  color:white;
 }
 .hero p{
-  color:#555;
+  color:#e2e8f0;
 }
 .hero button{
   margin-top:20px;
   padding:14px 20px;
-  background:#4f46e5;
-  color:white;
+  background:white;
+  color:#4f46e5;
   border:none;
   border-radius:10px;
 }
@@ -73,12 +103,11 @@ body{
 }
 .card-img{
   position:absolute;
-  width:180px; /* slightly reduced */
+  width:180px;
   border-radius:16px;
-  box-shadow:0 25px 60px rgba(0,0,0,0.25);
+  box-shadow:0 25px 60px rgba(0,0,0,0.4);
   transition:transform 0.2s ease;
 }
-
 .card1{top:0;left:90px;z-index:3}
 .card2{top:110px;left:20px;z-index:2}
 .card3{top:140px;left:160px;z-index:1}
@@ -104,31 +133,22 @@ body{
   background:white;
   padding:25px;
   border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* ✅ TESTIMONIALS FIXED */
+/* TESTIMONIALS */
 .slider{
   overflow-x:auto;
   display:flex;
   gap:20px;
   scroll-behavior:smooth;
-  padding-bottom:10px;
-}
-.slider::-webkit-scrollbar{
-  height:6px;
-}
-.slider::-webkit-scrollbar-thumb{
-  background:#cbd5e1;
-  border-radius:10px;
 }
 .testimonial{
   min-width:260px;
-  flex:0 0 auto;
   background:white;
   padding:20px;
   border-radius:12px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.05);
+  box-shadow:0 10px 20px rgba(0,0,0,0.1);
 }
 
 /* FORM */
@@ -138,7 +158,7 @@ body{
   border-radius:15px;
   max-width:400px;
   margin:40px auto;
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 input,select{
   width:100%;
@@ -202,6 +222,8 @@ button.main{
 
 <body>
 
+<div class="bg-glow"></div>
+
 <div class="nav">
   <div class="logo">Gift Verify</div>
   <button onclick="scrollToForm()">Try Now</button>
@@ -234,7 +256,6 @@ button.main{
   </div>
 </section>
 
-<!-- ✅ UPDATED TESTIMONIALS -->
 <section class="section">
   <div class="container slider reveal">
     <div class="testimonial"><b>Emily</b><p>Saved me from a fake card</p></div>
@@ -243,8 +264,6 @@ button.main{
     <div class="testimonial"><b>Liam</b><p>Works perfectly</p></div>
     <div class="testimonial"><b>Noah</b><p>Highly recommend</p></div>
     <div class="testimonial"><b>Ava</b><p>Great experience</p></div>
-    <div class="testimonial"><b>Daniel</b><p>Super smooth UI</p></div>
-    <div class="testimonial"><b>Sophia</b><p>Actually helpful</p></div>
   </div>
 </section>
 
